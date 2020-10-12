@@ -33,6 +33,10 @@ public class Grid : MonoBehaviour
     {
         get { return (int)(gridSize.x * gridSize.y); }
     }
+    public GameObject[,] ArrayGrid 
+    { 
+        get { return squares; } 
+    }
     #endregion
 
     // Start is called before the first frame update
