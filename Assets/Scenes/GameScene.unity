@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 1534645272446715518, guid: 5b5ab4a71d26ab847bc233b483ce4b7c, type: 3}
-  playButton: {fileID: 957306468517081389, guid: b9e2bd16d63dfa74b8a1cdab5cf81367, type: 3}
+  playButton: {fileID: 8950638318248122055, guid: b9e2bd16d63dfa74b8a1cdab5cf81367, type: 3}
   exitButton: {fileID: 5597240014189995339, guid: 19fb6416b21b2124cb66a39623af50a1, type: 3}
 --- !u!1001 &823106852
 PrefabInstance:
