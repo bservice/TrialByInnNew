@@ -92,6 +92,9 @@ public class PathFollowing : MonoBehaviour
                     // End
                     if (curX == endX && curY == endY)
                     {
+                        //Add the finish to the visited list
+                        visitedX.Add(curX);
+                        visitedY.Add(curY);
 
                     }
 
