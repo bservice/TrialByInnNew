@@ -9,15 +9,16 @@ public class CustomerQueque : MonoBehaviour
 	//~~~Public Fields~~~
 	public int size;
 	public int level;
-	public GameObject[] innerArray;
-	public GameObject mercenary;
-	public GameObject noble;
-	public GameObject villager;
-	public GameObject wizard;
+	public Customer[] innerArray;
+	public Customer mercenary;
+	public Customer noble;
+	public Customer villager;
+	public Customer wizard;
 
 	//~~~Private Fields~~~
 	private int index;
 	private int oldLevel;
+	private Vector3 pos;
 
 	// Start is called before the first frame update
 	void Start()
@@ -26,7 +27,7 @@ public class CustomerQueque : MonoBehaviour
 		oldLevel = level;
 		size = 3 + (2 * level);
 		index = -1;
-		innerArray = new GameObject[size];
+		innerArray = new Customer[size];
 
 		//For each data spot in the queque fill with a random NPC
 		for (int i = 0; i < size; i++)
@@ -52,7 +53,7 @@ public class CustomerQueque : MonoBehaviour
 	}
 
 	//To add data to the back of the queque
-	void Push(GameObject npc)
+	void Push(Customer npc)
 	{
 		index++;
 
@@ -62,7 +63,7 @@ public class CustomerQueque : MonoBehaviour
 			size *= 2;
 
 			//Making a new array that is twice the size of the old one
-			GameObject[] temp = new GameObject[size];
+			Customer[] temp = new Customer[size];
 
 			//Filling in the values of the new array
 			for (int i = 0; i < index; i++)
@@ -81,7 +82,7 @@ public class CustomerQueque : MonoBehaviour
 	}
 
 	//To remove data from the front of the queque
-	GameObject Pop()
+	public Customer Pop()
 	{
 		if (IsEmpty())
 		{
@@ -90,13 +91,21 @@ public class CustomerQueque : MonoBehaviour
 		else
 		{
 			//The data we are popping
-			GameObject temp = innerArray[0];
+			Customer temp = innerArray[0];
 
 			//Making the new array without the popped data
-			GameObject[] tempArray = new GameObject[size];
+			Customer[] tempArray = new Customer[size];
 			for (int i = 0; i <= index; i++)
 			{
-				tempArray[i] = innerArray[i + 1];
+				if (i + 1 > index)
+				{
+					tempArray[i] = null;
+
+				}
+                else
+                {
+					tempArray[i] = innerArray[i + 1];
+				}
 			}
 
 			for (int i = 0; i <= index; i++)
@@ -130,29 +139,45 @@ public class CustomerQueque : MonoBehaviour
 		//25% chance to get a Mercenary
 		if (number < 25)
 		{
-			GameObject merc = Instantiate(mercenary, new Vector3(-1000.0f, 0.0f, 0.0f), Quaternion.identity);
+			float height = -3 + index;
+			Customer merc = Instantiate(mercenary, new Vector3(-9.5f, height, 0.0f), Quaternion.identity);
+			
 			Push(merc);
 		}
 
 		//25% chance to get a Noble
 		else if (25 <= number && number < 50)
 		{
-			GameObject nob = Instantiate(mercenary, new Vector3(-1000.0f, 0.0f, 0.0f), Quaternion.identity);
+			float height = -3 + index;
+			Customer nob = Instantiate(noble, new Vector3(-9.5f, height, 0.0f), Quaternion.identity);
 			Push(nob);
 		}
 
 		//25% chance to get a Villager
 		else if (50 <= number && number < 75)
 		{
-			GameObject vil = Instantiate(mercenary, new Vector3(-1000.0f, 0.0f, 0.0f), Quaternion.identity);
+			float height = -3 + index;
+			Customer vil = Instantiate(villager, new Vector3(-9.5f, height, 0.0f), Quaternion.identity);
 			Push(vil);
 		}
 
 		//25% chance to get a Wizard
 		else if (75 <= number)
 		{
-			GameObject wiz = Instantiate(mercenary, new Vector3(-1000.0f, 0.0f, 0.0f), Quaternion.identity);
+			float height = -3 + index;
+			Customer wiz = Instantiate(wizard, new Vector3(-9.5f, height, 0.0f), Quaternion.identity);
 			Push(wiz);
+		}
+	}
+
+	//To move the queque spirtes down the list outside
+	public void ShiftQueque()
+    {
+		for (int i = 0; i <= index; i++)
+		{
+			pos = innerArray[i].transform.position;
+			pos.y -= 1.0f;
+			innerArray[i].transform.position = pos;
 		}
 	}
 }
