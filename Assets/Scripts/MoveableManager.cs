@@ -22,7 +22,7 @@ public class MoveableManager : MonoBehaviour
     //Fields
     public int tables; //Holds the number of tables 
     public Grid grid; //Insert the scene grid
-    public GameObject selectedObject; //Will be the object currently selected, changed whenever a new object is selected
+    public MoveableObject selectedObject; //Will be the object currently selected, changed whenever a new object is selected
 
     // Start is called before the first frame update
     void Start()
@@ -38,13 +38,26 @@ public class MoveableManager : MonoBehaviour
         */
 
         //Assign numbers for each moveable object
-
+        //grid.ArrayGrid[1, 2].GetComponent<Square>().Position = new Vector2(0,0);
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(selectedObject==null)
+        {
+           //Do nothing
+        }
+        //If the selected object is a table...
+        else if (selectedObject.tag == "table")
+        {
+            selectedObject.MoveObject(1, 0);
+        }
+        //If any other piece of furniture (e.g barrel)
+        else
+        {
+
+        }
     }
 }

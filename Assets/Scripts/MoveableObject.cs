@@ -14,8 +14,14 @@ public class MoveableObject : MonoBehaviour
     // The size of the object in pixels.
     private Vector2 size;
     // Whether or not the object is being lifted.
-    private bool isLifted;
+    public bool isLifted;
     #endregion
+    public MoveableManager manager;
+    public Grid grid;
+    public int xPosition; //Holds what x position in the grid the object is on
+    public int yPosition; //Holds what y position in the grid the object is on
+    
+    //public Vector2 position;
 
     #region Properties
     public Vector2 Position
@@ -57,6 +63,8 @@ public class MoveableObject : MonoBehaviour
     {
         // Setting the object to blue by default.
         this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.blue);
+        manager = FindObjectOfType<MoveableManager>(); //Search for manager in the scene
+        //grid =  grab from gamemanager;
     }
 
     // Update is called once per frame
@@ -77,7 +85,10 @@ public class MoveableObject : MonoBehaviour
         {
             // Put it down.
             isLifted = false;
+            manager.GetComponent<MoveableManager>().selectedObject = this;
+            manager.selectedObject = null;
             this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.blue);
+            
         }
         // If the object is on the ground...
         else
@@ -85,6 +96,22 @@ public class MoveableObject : MonoBehaviour
             // Lift it up.
             isLifted = true;
             this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
+            //Set the manager's selectedObject to this object
+            manager.selectedObject = this;
         }
+    }
+
+    public void MoveObject(int x, int y)
+    //Effect: Moves the object to a new position based on xy grid position
+    //Called in: MoveableManager
+    {
+        //Adds the amount we are moving by to the position so we know what part of the grid to move to.
+        int xToMoveTo = xPosition + x;
+        int yToMoveTo = yPosition + y;
+        //Sets transform = the world position of that grid tile
+        transform.position = grid.ArrayGrid[xToMoveTo, yToMoveTo].GetComponent<Square>().Position;
+        //Set the grid position of the object to its new position
+        xPosition = xToMoveTo;
+        yPosition = yToMoveTo;
     }
 }
