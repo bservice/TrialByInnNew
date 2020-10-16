@@ -62,7 +62,11 @@ public class MoveableObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //If the object is selected, you can move it around with WASD.
+        if(isLifted)
+        {
+
+        }
     }
 
     // What happens when the mouse button is clicked.
