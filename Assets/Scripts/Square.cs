@@ -53,8 +53,9 @@ public class Square : MonoBehaviour
     {
         size = 1.0f;
         empty = true;
-        // Setting the squares to green by default.
-        this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.green);
+        // Setting the squares to be off by default.
+        this.GetComponent<SpriteRenderer>().enabled = false;
+        
     }
 
     // Update is called once per frame
@@ -66,12 +67,18 @@ public class Square : MonoBehaviour
     // What happens when the mouse hovers over a square.
     private void OnMouseOver()
     {
-        this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.red);
+        this.GetComponent<SpriteRenderer>().enabled = true;
+        //this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.red);
     }
 
     // What happens when the mouse exits a square.
     private void OnMouseExit()
     {
-        this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.green);
+        if (this.GetComponent<SpriteRenderer>() != null)
+        {
+            this.GetComponent<SpriteRenderer>().enabled = false;
+        }
+
+        //this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.green);
     }
 }
