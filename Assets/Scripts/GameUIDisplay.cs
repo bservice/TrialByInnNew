@@ -9,6 +9,9 @@ public class GameUIDisplay : MonoBehaviour
     private int patronsSat;
     private int score;
 
+    private float xPos;
+    private float yPos;
+
     public int PatronsLeft
     {
         get { return patronsLeft; }
@@ -41,23 +44,26 @@ public class GameUIDisplay : MonoBehaviour
         patronsLeft = 10;
         patronsSat = 0;
         score = 0;
+        xPos = Camera.main.WorldToScreenPoint(gameObject.transform.position).x;
+        yPos = Screen.height - Camera.main.WorldToScreenPoint(gameObject.transform.position).y;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        xPos = Camera.main.WorldToScreenPoint(gameObject.transform.position).x;
+        yPos = Screen.height - Camera.main.WorldToScreenPoint(gameObject.transform.position).y;
     }
 
     private void OnGUI()
     {
         //Patrons left
-        GUI.Label(new Rect(120, 28, 22, 19), patronsLeft.ToString());
+        GUI.Label(new Rect(xPos + 10.0f, yPos - 39.0f, 22, 19), patronsLeft.ToString());
 
         //Patrons sat
-        GUI.Label(new Rect(120, 58, 22, 19), patronsSat.ToString());
+        GUI.Label(new Rect(xPos + 10.0f, yPos - 9.0f, 22, 19), patronsSat.ToString());
 
         //Score
-        GUI.Label(new Rect(120, 92, 22, 19), score.ToString());
+        GUI.Label(new Rect(xPos + 10.0f, yPos + 19.0f, 22, 19), score.ToString());
     }
 }
