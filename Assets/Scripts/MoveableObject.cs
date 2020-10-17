@@ -125,7 +125,7 @@ public class MoveableObject : MonoBehaviour
     public bool ObstacleCheck()
     {
 
-
+        return true;
 
     }
 }
