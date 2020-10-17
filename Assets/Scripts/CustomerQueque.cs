@@ -139,33 +139,57 @@ public class CustomerQueque : MonoBehaviour
 		//25% chance to get a Mercenary
 		if (number < 25)
 		{
+			/*Lucas Code
 			float height = -3 + index;
 			Customer merc = Instantiate(mercenary, new Vector3(-9.5f, height, 0.0f), Quaternion.identity);
-			
+			*/
+			// Carson Code
+			float width = -1.2f - ((index+1) * .16f);
+			Customer merc = Instantiate(mercenary, new Vector3(width, -0.8f, 0.0f), Quaternion.identity);
+
 			Push(merc);
 		}
 
 		//25% chance to get a Noble
 		else if (25 <= number && number < 50)
 		{
+			/*Lucas Code
 			float height = -3 + index;
 			Customer nob = Instantiate(noble, new Vector3(-9.5f, height, 0.0f), Quaternion.identity);
+			*/
+			// Carson Code
+			float width = -1.2f - ((index + 1) * .16f);
+			Customer nob = Instantiate(noble, new Vector3(width, -0.8f, 0.0f), Quaternion.identity);
+
 			Push(nob);
+
 		}
 
 		//25% chance to get a Villager
 		else if (50 <= number && number < 75)
 		{
+			/*Lucas Code
 			float height = -3 + index;
 			Customer vil = Instantiate(villager, new Vector3(-9.5f, height, 0.0f), Quaternion.identity);
+			*/
+			// Carson Code
+			float width = -1.2f - ((index + 1) * .16f);
+			Customer vil = Instantiate(villager, new Vector3(width, -0.8f, 0.0f), Quaternion.identity);
+
 			Push(vil);
 		}
 
 		//25% chance to get a Wizard
 		else if (75 <= number)
 		{
+			/*Lucas Code
 			float height = -3 + index;
 			Customer wiz = Instantiate(wizard, new Vector3(-9.5f, height, 0.0f), Quaternion.identity);
+			*/
+			// Carson Code
+			float width = -1.2f - ((index + 1) * .16f);
+			Customer wiz = Instantiate(wizard, new Vector3(width, -0.8f, 0.0f), Quaternion.identity);
+
 			Push(wiz);
 		}
 	}
@@ -176,7 +200,10 @@ public class CustomerQueque : MonoBehaviour
 		for (int i = 0; i <= index; i++)
 		{
 			pos = innerArray[i].transform.position;
+			/*Lucas Code
 			pos.y -= 1.0f;
+			*/
+			pos.x += 0.16f;
 			innerArray[i].transform.position = pos;
 		}
 	}
