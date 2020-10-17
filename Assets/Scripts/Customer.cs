@@ -16,7 +16,9 @@ public class Customer : MonoBehaviour
     // Carson Fields
     private int curX = 0;
     private int curY = 9;
+    private bool placed = false;
     public Animator animator;
+
 
     //~~~Properties~~~
     public bool ActivePlaying
@@ -69,7 +71,15 @@ public class Customer : MonoBehaviour
 
             // Carson Code
             move();
+            placed = true;
             
+        }
+        // Carson Code
+        // Sit once no longer active and have moved
+        else if (placed)
+        {
+            animator.SetBool("Walk", false);
+            animator.SetBool("Sit", true);
         }
     }
     // Carson Code
@@ -149,13 +159,6 @@ public class Customer : MonoBehaviour
                 grid.ArrayGrid[curX, curY].GetComponent<Square>().isEmpty = false;
             }
         }
-
-        // Sit
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            animator.SetBool("Walk", false);
-            animator.SetBool("Sit", true);
-        }
     }
 
 
@@ -167,7 +170,7 @@ public class Customer : MonoBehaviour
             // UP
             case 1:
                 // Boundary
-                if (destination <= 0.64f)
+                if (curY - 1 >= -1)
                 {
                     // Occupied
                     if (grid.ArrayGrid[curX, curY - 1].GetComponent<Square>().isEmpty == true)
@@ -178,7 +181,7 @@ public class Customer : MonoBehaviour
             // LEFT
             case 2:
                 // Boundary
-                if (destination >= -1.2f)
+                if (curX - 1 >= -1)
                 {
                     // Occupied
                     if (grid.ArrayGrid[curX - 1, curY].GetComponent<Square>().isEmpty == true)
@@ -189,7 +192,7 @@ public class Customer : MonoBehaviour
             // DOWN
             case 3:
                 // Boundary
-                if (destination >= -0.8f)
+                if (curY + 1 <= 10)
                 {
                     // Occupied
                     if (grid.ArrayGrid[curX, curY + 1].GetComponent<Square>().isEmpty == true)
@@ -200,7 +203,7 @@ public class Customer : MonoBehaviour
             // RIGHT
             case 4:
                 // Boundary
-                if (destination <= 1.04f)
+                if (curX + 1 <= 15)
                 {
                     // Occupied
                     if (grid.ArrayGrid[curX + 1, curY].GetComponent<Square>().isEmpty == true)
