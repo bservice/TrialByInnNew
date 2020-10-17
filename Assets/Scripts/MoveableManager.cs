@@ -23,6 +23,7 @@ public class MoveableManager : MonoBehaviour
     public int tables; //Holds the number of tables 
     public Grid grid; //Insert the scene grid
     public MoveableObject selectedObject; //Will be the object currently selected, changed whenever a new object is selected
+    private char controlsInput; //W, A, S, or D depending on player controls input
 
     // Start is called before the first frame update
     void Start()
@@ -49,15 +50,27 @@ public class MoveableManager : MonoBehaviour
         {
            //Do nothing
         }
-        //If the selected object is a table...
-        else if (selectedObject.tag == "table")
-        {
-            selectedObject.MoveObject(1, 0);
-        }
-        //If any other piece of furniture (e.g barrel)
+        //If an object is selected
         else
-        {
-
+        { 
+            //Based on input, move in a particular direction
+            if(controlsInput=='w')
+            {
+                selectedObject.MoveObject(0, -1);
+            }
+            else if (controlsInput == 's')
+            {
+                selectedObject.MoveObject(0, -1);
+            }
+            else if (controlsInput == 'a')
+            {
+                selectedObject.MoveObject(-1, 0);
+            }
+            else if (controlsInput == 'd')
+            {
+                selectedObject.MoveObject(1, 0);
+            }
+            
         }
     }
 }
