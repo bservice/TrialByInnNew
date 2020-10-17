@@ -14,6 +14,7 @@ public class LevelManager : MonoBehaviour
     private bool shift;
     private Vector3 pos;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +35,7 @@ public class LevelManager : MonoBehaviour
             inProgress = true;
             Debug.Log(inProgress);
         }
-
+        /* Lucas Code
         if (Vector3.Distance(pos, customerRef.transform.position) > 2.0f && shift)
         {
             quequeRef.ShiftQueque();
@@ -46,5 +47,19 @@ public class LevelManager : MonoBehaviour
             customerRef.ActivePlaying = false;
             inProgress = false;
         }
+        */
+        // Carson Code
+        // Temp switches on Left Arrow Press
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            quequeRef.ShiftQueque();
+            shift = false;
+            customerRef.ActivePlaying = false;
+            inProgress = false;
+        }
+        
+
+
+
     }
 }
