@@ -85,10 +85,9 @@ public class MoveableObject : MonoBehaviour
         {
             // Put it down.
             isLifted = false;
-            manager.GetComponent<MoveableManager>().selectedObject = this;
-            manager.selectedObject = null;
             this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.blue);
-            
+            //Set the manager's selectedObject to empty
+            manager.selectedObject = null;
         }
         // If the object is on the ground...
         else
@@ -108,10 +107,25 @@ public class MoveableObject : MonoBehaviour
         //Adds the amount we are moving by to the position so we know what part of the grid to move to.
         int xToMoveTo = xPosition + x;
         int yToMoveTo = yPosition + y;
-        //Sets transform = the world position of that grid tile
-        transform.position = grid.ArrayGrid[xToMoveTo, yToMoveTo].GetComponent<Square>().Position;
-        //Set the grid position of the object to its new position
-        xPosition = xToMoveTo;
-        yPosition = yToMoveTo;
+
+        //Check for obstacles/occupied tile? Also walls
+        if(ObstacleCheck())
+        {
+            //If there aren't any check if there are for attached objects, then move them
+
+            //Sets transform = the world position of that grid tile
+            transform.position = grid.ArrayGrid[xToMoveTo, yToMoveTo].GetComponent<Square>().Position;
+            //Set the grid position of the object to its new position
+            xPosition = xToMoveTo;
+            yPosition = yToMoveTo;
+        }
+    }
+        
+
+    public bool ObstacleCheck()
+    {
+
+
+
     }
 }
