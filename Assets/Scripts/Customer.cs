@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class Customer : MonoBehaviour
@@ -14,9 +15,12 @@ public class Customer : MonoBehaviour
     private Vector3 pos;
 
     // Carson Fields
+    private float tileDistance = .16f;
     private int curX = 0;
     private int curY = 9;
     private bool placed = false;
+    private bool[] dir = { false, false, false, false }; // 0 = Up, 1 = Left, 2 = Down, 3 = Right
+
     public Animator animator;
 
 
@@ -37,6 +41,10 @@ public class Customer : MonoBehaviour
     void Start()
     {
         pos = this.transform.position;
+
+        // Casron Code
+        // Call move every .3s
+        InvokeRepeating("move", 0.0f, 0.3f);
     }
 
     // Update is called once per frame
@@ -69,10 +77,12 @@ public class Customer : MonoBehaviour
             }
             */
 
+
             // Carson Code
-            move();
-            placed = true;
-            
+            // Update what keys are pressed and released
+            press();
+            depress();
+            placed = true;    
         }
         // Carson Code
         // Sit once no longer active and have moved
@@ -86,16 +96,16 @@ public class Customer : MonoBehaviour
     // Move WASD in grid
     void move()
     {
-        float tileDistance = .16f;
         // UP
-        if (Input.GetKeyDown(KeyCode.W))
+        if (dir[0])
         {
-            animator.SetBool("Sit", false);
-            animator.SetBool("Walk", true);
-
             // Check if move = possible
             if (moveCheck(pos.y + tileDistance, 1))
             {
+                // Walk Anim
+                animator.SetBool("Walk", true);
+
+                // Move
                 pos.y += tileDistance;
                 this.transform.position = pos;
 
@@ -106,14 +116,15 @@ public class Customer : MonoBehaviour
             }
         }
         //LEFT
-        if (Input.GetKeyDown(KeyCode.A))
+        else if (dir[1])
         {
-            animator.SetBool("Sit", false);
-            animator.SetBool("Walk", true);
-
             // Check if move = possible
             if (moveCheck(pos.x - tileDistance, 2))
             {
+                // Walk Anim
+                animator.SetBool("Walk", true);
+
+                // Move
                 pos.x -= tileDistance;
                 this.transform.position = pos;
 
@@ -124,14 +135,15 @@ public class Customer : MonoBehaviour
             }
         }
         // DOWN
-        if (Input.GetKeyDown(KeyCode.S))
+        else if (dir[2])
         {
-            animator.SetBool("Sit", false);
-            animator.SetBool("Walk", true);
-
             // Check if move = possible
             if (moveCheck(pos.y - tileDistance, 3))
             {
+                // Walk Anim
+                animator.SetBool("Walk", true);
+
+                // Move
                 pos.y -= tileDistance;
                 this.transform.position = pos;
 
@@ -142,14 +154,15 @@ public class Customer : MonoBehaviour
             }
         }
         // RIGHT
-        if (Input.GetKeyDown(KeyCode.D))
+        else if (dir[3])
         {
-            animator.SetBool("Sit", false);
-            animator.SetBool("Walk", true);
-
             // Check if move = possible
             if (moveCheck(pos.x + tileDistance, 4))
             {
+                // Walk Anim
+                animator.SetBool("Walk", true);
+
+                // Move
                 pos.x += tileDistance;
                 this.transform.position = pos;
 
@@ -158,6 +171,11 @@ public class Customer : MonoBehaviour
                 curX++;
                 grid.ArrayGrid[curX, curY].GetComponent<Square>().isEmpty = false;
             }
+        }
+        else
+        {
+            // Idle Anim
+            animator.SetBool("Walk", false);
         }
     }
 
@@ -170,7 +188,7 @@ public class Customer : MonoBehaviour
             // UP
             case 1:
                 // Boundary
-                if (curY - 1 >= -1)
+                if (curY - 1 > -1)
                 {
                     // Occupied
                     if (grid.ArrayGrid[curX, curY - 1].GetComponent<Square>().isEmpty == true)
@@ -181,7 +199,7 @@ public class Customer : MonoBehaviour
             // LEFT
             case 2:
                 // Boundary
-                if (curX - 1 >= -1)
+                if (curX - 1 > -1)
                 {
                     // Occupied
                     if (grid.ArrayGrid[curX - 1, curY].GetComponent<Square>().isEmpty == true)
@@ -192,7 +210,7 @@ public class Customer : MonoBehaviour
             // DOWN
             case 3:
                 // Boundary
-                if (curY + 1 <= 10)
+                if (curY + 1 < grid.yAxisLength)
                 {
                     // Occupied
                     if (grid.ArrayGrid[curX, curY + 1].GetComponent<Square>().isEmpty == true)
@@ -203,7 +221,7 @@ public class Customer : MonoBehaviour
             // RIGHT
             case 4:
                 // Boundary
-                if (curX + 1 <= 15)
+                if (curX + 1 < grid.xAxisLength)
                 {
                     // Occupied
                     if (grid.ArrayGrid[curX + 1, curY].GetComponent<Square>().isEmpty == true)
@@ -214,4 +232,39 @@ public class Customer : MonoBehaviour
 
         return false;
     }
+
+    // Returns true for button pressed
+    void press()
+    {
+        // Up
+        if (Input.GetKeyDown(KeyCode.W))
+            dir[0] = true;
+        // Left
+        if (Input.GetKeyDown(KeyCode.A))
+            dir[1] = true;
+        // Down
+        if (Input.GetKeyDown(KeyCode.S))
+            dir[2] = true;
+        // Right
+        if (Input.GetKeyDown(KeyCode.D))
+            dir[3] = true;
+    }
+
+    // Returns false for button released
+    void depress()
+    {
+        // Up
+        if (Input.GetKeyUp(KeyCode.W))
+            dir[0] = false;
+        // Left
+        if (Input.GetKeyUp(KeyCode.A))
+            dir[1] = false;
+        // Down
+        if (Input.GetKeyUp(KeyCode.S))
+            dir[2] = false;
+        // Right
+        if (Input.GetKeyUp(KeyCode.D))
+            dir[3] = false;
+    }
+
 }
