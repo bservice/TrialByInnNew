@@ -219,12 +219,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1523c955307355d469d05378feb078ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  position: {x: 0, y: 0}
-  isLifted: 0
   manager: {fileID: 0}
   grid: {fileID: 1450040188}
+  position: {x: 0, y: 0}
+  isLifted: 0
   xPosition: 0
   yPosition: 0
+  width: 0
+  height: 0
+  associatedObjects: []
 --- !u!61 &99462978
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -23,8 +23,6 @@ public class MoveableManager : MonoBehaviour
     public int tables; //Holds the number of tables 
     public Grid grid; //Insert the scene grid
     public MoveableObject selectedObject; //Will be the object currently selected, changed whenever a new object is selected
-    private char controlsInput; //W, A, S, or D depending on player controls input
-
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +44,7 @@ public class MoveableManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(selectedObject==null)
+        if (selectedObject==null)
         {
            //Do nothing
         }
@@ -54,23 +52,67 @@ public class MoveableManager : MonoBehaviour
         else
         { 
             //Based on input, move in a particular direction
-            if(controlsInput=='w')
+            if(Input.GetKeyDown(KeyCode.W))
             {
-                selectedObject.MoveObject(0, -1);
+                MoveAttempt('w');
             }
-            else if (controlsInput == 's')
+            else if (Input.GetKeyDown(KeyCode.S))
             {
-                selectedObject.MoveObject(0, -1);
+                MoveAttempt('s');
             }
-            else if (controlsInput == 'a')
+            else if (Input.GetKeyDown(KeyCode.A))
             {
-                selectedObject.MoveObject(-1, 0);
+                MoveAttempt('a');
             }
-            else if (controlsInput == 'd')
+            else if (Input.GetKeyDown(KeyCode.D))
             {
-                selectedObject.MoveObject(1, 0);
+                MoveAttempt('d');
             }
-            
+
         }
     }
+
+    void MoveAttempt(char input)
+    {
+        int x = 0;
+        int y = 0; 
+        //Sets x and y to move by based on direction
+        if (input == 'w') { x = 0; y = 1; }
+        else if (input == 's') { x = 0; y = -1; }
+        else if (input == 'a') { x = -1; y = 0; }
+        else if (input == 'd') { x = 1; y = 0; }
+        bool canMove = true; //Becomes false if any of the objects that will be moved can't move to that space
+        //Check free tile for the selected object
+        if(!selectedObject.FreeMoveCheck(x, y))
+        {
+            canMove = false;
+        }
+        //Check free tile for all its buddies
+        if (selectedObject.associatedObjects.Count != 0)
+        {
+            for (int i = 0; i < selectedObject.associatedObjects.Count; i++)
+            {
+                //If you can't move the object into that spot
+                if (!selectedObject.associatedObjects[i].FreeMoveCheck(x, y))
+                {
+                    canMove = false;
+                    //Call a method that turns object(s) red briefly 
+                }
+            }
+        }
+        //If all objects can move to their new tiles, move them
+        if (canMove)
+        {
+            selectedObject.MoveObject(x, y);
+            //If there are associated objects, move them
+            if (selectedObject.associatedObjects.Count != 0)
+            {
+                for (int i = 0; i < selectedObject.associatedObjects.Count; i++)
+                {
+                    selectedObject.associatedObjects[i].MoveObject(x, y);
+                }
+            }
+        }
+    }
+
 }
