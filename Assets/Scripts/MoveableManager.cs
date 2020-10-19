@@ -68,7 +68,6 @@ public class MoveableManager : MonoBehaviour
             {
                 MoveAttempt('d');
             }
-
         }
     }
 
