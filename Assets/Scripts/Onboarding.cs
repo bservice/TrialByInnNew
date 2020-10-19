@@ -104,7 +104,8 @@ public class Onboarding : MonoBehaviour
         SetBubbleActive(6, wrongSeat);
         xPos = host.transform.position.x;
         yPos = host.transform.position.y;
-        prevHostPos = host.transform.position;        
+        prevHostPos = host.transform.position;
+        SetPosition();
         count = 0;
     }
 
