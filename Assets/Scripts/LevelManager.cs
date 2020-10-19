@@ -7,6 +7,8 @@ public class LevelManager : MonoBehaviour
     //~~~Public Fields~~~
     public CustomerQueque quequeRef;
     public GameObject target;
+    public PauseTest pauseMenu;
+    public GameUIDisplay scoreboard;
 
     //~~~Private Fields~~~
     private Customer customerRef;
@@ -25,41 +27,46 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && inProgress == false)
+        if (!pauseMenu.Paused)
         {
-            customerRef = quequeRef.Pop();
-            pos = customerRef.transform.position;
+            if (Input.GetKeyDown(KeyCode.Space) && inProgress == false)
+            {
+                customerRef = quequeRef.Pop();
+                pos = customerRef.transform.position;
 
-            customerRef.ActivePlaying = true;
-            shift = true;
-            inProgress = true;
-            Debug.Log(inProgress);
-        }
-        /* Lucas Code
-        if (Vector3.Distance(pos, customerRef.transform.position) > 2.0f && shift)
-        {
-            quequeRef.ShiftQueque();
-            shift = false;
-        }
+                customerRef.ActivePlaying = true;
+                shift = true;
+                inProgress = true;
+                Debug.Log(inProgress);
+            }
+            /* Lucas Code
+            if (Vector3.Distance(pos, customerRef.transform.position) > 2.0f && shift)
+            {
+                quequeRef.ShiftQueque();
+                shift = false;
+            }
 
-        if (Vector3.Distance(customerRef.transform.position, target.transform.position) <= 2.75f)
-        {
-            customerRef.ActivePlaying = false;
-            inProgress = false;
-        }
-        */
-        // Carson Code
-        // Temp switches on Left Arrow Press
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            quequeRef.ShiftQueque();
-            shift = false;
-            customerRef.ActivePlaying = false;
-            inProgress = false;
-        }
-        
+            if (Vector3.Distance(customerRef.transform.position, target.transform.position) <= 2.75f)
+            {
+                customerRef.ActivePlaying = false;
+                inProgress = false;
+            }
+            */
+            // Carson Code
+            // Temp switches on Left Arrow Press
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                quequeRef.ShiftQueque();
+                scoreboard.Score += 10;
+                scoreboard.PatronsSat++;
+                scoreboard.PatronsLeft--;
+                shift = false;
+                customerRef.ActivePlaying = false;
+                inProgress = false;
+            }
 
 
+        }
 
     }
 }

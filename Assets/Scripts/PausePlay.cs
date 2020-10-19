@@ -5,7 +5,7 @@ using UnityEngine;
 public class PausePlay : MonoBehaviour
 {
     private bool clicked;
-    private float timeLeft;
+    //private float timeLeft;
 
     public bool Clicked
     {
@@ -19,7 +19,7 @@ public class PausePlay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timeLeft = 5.1f;
+        //timeLeft = 5.1f;
         //gameObject.GetComponent<SpriteRenderer>().color = new Color(210f / 255f, 198f / 255f, 140f / 255f);
         clicked = false;
     }

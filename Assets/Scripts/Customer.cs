@@ -13,6 +13,7 @@ public class Customer : MonoBehaviour
     //~~~Private Fields~~~
     private bool activePlaying = false;
     private Vector3 pos;
+    private PauseTest pauseMenu;
 
     // Carson Fields
     private float tileDistance = .16f;
@@ -41,6 +42,7 @@ public class Customer : MonoBehaviour
     void Start()
     {
         pos = this.transform.position;
+        pauseMenu = FindObjectOfType<PauseTest>();
 
         // Casron Code
         // Call move every .3s
@@ -50,46 +52,49 @@ public class Customer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        pos = this.transform.position;
-        //If the current customer activate the movement
-        if (activePlaying)
+        if (!pauseMenu.Paused)
         {
-            /* Lucas Code
-            if (Input.GetKey(KeyCode.W))
+            pos = this.transform.position;
+            //If the current customer activate the movement
+            if (activePlaying)
             {
-                pos.y += speed;
-                this.transform.position = pos;
-            }
-            if (Input.GetKey(KeyCode.A))
-            {
-                pos.x -= speed;
-                this.transform.position = pos;
-            }
-            if (Input.GetKey(KeyCode.S))
-            {
-                pos.y -= speed;
-                this.transform.position = pos;
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                pos.x += speed;
-                this.transform.position = pos;
-            }
-            */
+                /* Lucas Code
+                if (Input.GetKey(KeyCode.W))
+                {
+                    pos.y += speed;
+                    this.transform.position = pos;
+                }
+                if (Input.GetKey(KeyCode.A))
+                {
+                    pos.x -= speed;
+                    this.transform.position = pos;
+                }
+                if (Input.GetKey(KeyCode.S))
+                {
+                    pos.y -= speed;
+                    this.transform.position = pos;
+                }
+                if (Input.GetKey(KeyCode.D))
+                {
+                    pos.x += speed;
+                    this.transform.position = pos;
+                }
+                */
 
 
+                // Carson Code
+                // Update what keys are pressed and released
+                press();
+                depress();
+                placed = true;
+            }
             // Carson Code
-            // Update what keys are pressed and released
-            press();
-            depress();
-            placed = true;    
-        }
-        // Carson Code
-        // Sit once no longer active and have moved
-        else if (placed)
-        {
-            animator.SetBool("Walk", false);
-            animator.SetBool("Sit", true);
+            // Sit once no longer active and have moved
+            else if (placed)
+            {
+                animator.SetBool("Walk", false);
+                animator.SetBool("Sit", true);
+            }
         }
     }
     // Carson Code
