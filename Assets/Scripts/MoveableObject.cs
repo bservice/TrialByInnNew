@@ -23,8 +23,8 @@ public class MoveableObject : MonoBehaviour
 
     public int xPosition; //Holds what x position in the grid the object is on
     public int yPosition; //Holds what y position in the grid the object is on
-    public int width; //How many tiles wide the object is
-    public int height; //How many tiles tall the object is
+    /*public int width; //How many tiles wide the object is
+    public int height; //How many tiles tall the object is*/
     public List<MoveableObject> associatedObjects; //List full of the friends of the object that move with it
     //public Vector2 position;
     #endregion
@@ -85,8 +85,8 @@ public class MoveableObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Puts the object at the world position of their current tile (mostly used to get it in the right place at the start)
         transform.position = grid.ArrayGrid[xPosition, yPosition].GetComponent<Square>().Position;
-
     }
 
     // What happens when the mouse button is clicked.
@@ -109,7 +109,7 @@ public class MoveableObject : MonoBehaviour
                 this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.white);
                 for (int i = 0; i < associatedObjects.Count; i++)
                 {
-                    associatedObjects[i].GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.white);
+                        associatedObjects[i].GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.white);
                 }
                 //Unselect the Object. 
                 manager.selectedObject = null;
@@ -126,9 +126,9 @@ public class MoveableObject : MonoBehaviour
                 //Change color of all associated objects to cyan
                 this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
                 for (int i = 0; i < associatedObjects.Count; i++)
-                {
-                    associatedObjects[i].GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
-                }
+                    {
+                        associatedObjects[i].GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
+                    }          
                 //Select the object.
                 manager.selectedObject = this;
             }   
@@ -165,7 +165,7 @@ public class MoveableObject : MonoBehaviour
         int xToMove = xPosition + x;
         int yToMove = yPosition + y;
         //Return true if the tile is empty, and if it's not a wall.
-        if ( grid.ArrayGrid[xToMove, yToMove].GetComponent<Square>().isEmpty && ((xToMove<grid.gridSize.x) && (xToMove>-1) && (yToMove<grid.gridSize.y) && (yToMove>-1)) )
+        if (((xToMove < grid.gridSize.x) && (xToMove > -1) && (yToMove < grid.gridSize.y) && (yToMove > -1)) && grid.ArrayGrid[xToMove, yToMove].GetComponent<Square>().isEmpty)
         {
             return true;
         }
@@ -190,7 +190,7 @@ public class MoveableObject : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionStay2D(Collision2D other)
     //Effect: Sets colliding bool to true which is used in OnMouseDown()
     //Called whenever there is a collision
     {
@@ -206,6 +206,16 @@ public class MoveableObject : MonoBehaviour
                     associatedObjects[i].GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.red);
                 }
             }
+            //If this is an object attached to the selected object, don't let them put the selected object down.
+            else if(manager.selectedObject.associatedObjects.Contains(this))
+            {
+                manager.selectedObject.isColliding = true;
+                manager.selectedObject.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.red);
+                for (int i = 0; i < manager.selectedObject.associatedObjects.Count; i++)
+                {
+                    manager.selectedObject.associatedObjects[i].GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.red);
+                }
+            }
         }
     }
     //Effect: Sets colliding bool to true which is used in OnMouseDown()
@@ -218,10 +228,19 @@ public class MoveableObject : MonoBehaviour
             //Sets color back to default
             if(this==manager.selectedObject)
             {
-                this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
+               this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
                 for (int i = 0; i < associatedObjects.Count; i++)
                 {
                     associatedObjects[i].GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
+                }
+            }
+            else if (manager.selectedObject.associatedObjects.Contains(this))
+            {
+                manager.selectedObject.isColliding = false;
+                manager.selectedObject.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan    );
+                for (int i = 0; i < manager.selectedObject.associatedObjects.Count; i++)
+                {
+                    manager.selectedObject.associatedObjects[i].GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
                 }
             }
         }

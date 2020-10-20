@@ -95,7 +95,6 @@ public class MoveableManager : MonoBehaviour
                 if (!selectedObject.associatedObjects[i].FreeMoveCheck(x, y))
                 {
                     canMove = false;
-                    //Call a method that turns object(s) red briefly 
                 }
             }
         }
