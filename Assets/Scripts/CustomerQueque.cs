@@ -14,6 +14,8 @@ public class CustomerQueque : MonoBehaviour
 	public Customer noble;
 	public Customer villager;
 	public Customer wizard;
+	public PauseTest pauseMenu;
+	public GameUIDisplay scoreboard;
 
 	//~~~Private Fields~~~
 	private int index;
@@ -28,6 +30,7 @@ public class CustomerQueque : MonoBehaviour
 		size = 3 + (2 * level);
 		index = -1;
 		innerArray = new Customer[size];
+		scoreboard.PatronsLeft = size;
 
 		//For each data spot in the queque fill with a random NPC
 		for (int i = 0; i < size; i++)
@@ -39,16 +42,19 @@ public class CustomerQueque : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		//Re-make the queque based on the level
-		if(oldLevel < level && IsEmpty())
-        {
-			size = 3 + (2 * level);
-			//For each data spot in the queque fill with a random NPC
-			for (int i = 0; i < size; i++)
+		if (!pauseMenu.Paused)
+		{
+			//Re-make the queque based on the level
+			if (oldLevel < level && IsEmpty())
 			{
-				GetRandomNPC();
+				size = 3 + (2 * level);
+				//For each data spot in the queque fill with a random NPC
+				for (int i = 0; i < size; i++)
+				{
+					GetRandomNPC();
+				}
+				oldLevel = level;
 			}
-			oldLevel = level;
 		}
 	}
 
