@@ -86,6 +86,7 @@ public class LevelManager : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Space) && inProgress == false)
                 {
+
                     customerRef = quequeRef.Pop();
                     pos = customerRef.transform.position;
 
@@ -119,7 +120,8 @@ public class LevelManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.P))
             {
                 quequeRef.ShiftQueque();
-                scoreboard.Score += 10;
+                // + 50 per seat
+                scoreboard.Score += 50;
                 scoreboard.PatronsSat++;
                 scoreboard.PatronsLeft--;
                 shift = false;

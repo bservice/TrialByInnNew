@@ -44,7 +44,7 @@ public class GameUIDisplay : MonoBehaviour
         DontDestroyOnLoad(this);
         patronsLeft = 10;
         patronsSat = 0;
-        score = 0;
+        score = 500;
         xPos = Camera.main.WorldToScreenPoint(gameObject.transform.position).x;
         yPos = Screen.height - Camera.main.WorldToScreenPoint(gameObject.transform.position).y;
     }
