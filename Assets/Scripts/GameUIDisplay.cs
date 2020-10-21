@@ -41,6 +41,7 @@ public class GameUIDisplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DontDestroyOnLoad(this);
         patronsLeft = 10;
         patronsSat = 0;
         score = 0;

@@ -120,11 +120,6 @@ public class Onboarding : MonoBehaviour
             SetPosition();
             prevHostPos = host.transform.position;
         }
-
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            welcome = !welcome;
-        }
     }
 
     //Updates the position of the bubble so it is near the host
