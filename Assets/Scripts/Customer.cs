@@ -24,6 +24,7 @@ public class Customer : MonoBehaviour
     private bool[] dir = { false, false, false, false }; // 0 = Up, 1 = Left, 2 = Down, 3 = Right
 
     public Animator animator;
+    public GameUIDisplay scoreboard;
 
 
     //~~~Properties~~~
@@ -46,7 +47,7 @@ public class Customer : MonoBehaviour
         pauseMenu = FindObjectOfType<PauseTest>();
         onboard = FindObjectOfType<Onboarding>();
 
-        // Casron Code
+        // Carson Code
         // Call move every .3s
         InvokeRepeating("move", 0.0f, 0.3f);
     }
@@ -123,6 +124,9 @@ public class Customer : MonoBehaviour
                 grid.ArrayGrid[curX, curY].GetComponent<Square>().isEmpty = true;
                 curY--;
                 grid.ArrayGrid[curX, curY].GetComponent<Square>().isEmpty = false;
+
+                // -10 per move
+                scoreboard.Score -= 10;
             }
         }
         //LEFT
@@ -142,6 +146,9 @@ public class Customer : MonoBehaviour
                 grid.ArrayGrid[curX, curY].GetComponent<Square>().isEmpty = true;
                 curX--;
                 grid.ArrayGrid[curX, curY].GetComponent<Square>().isEmpty = false;
+
+                // -10 per move
+                scoreboard.Score -= 10;
             }
         }
         // DOWN
@@ -161,6 +168,9 @@ public class Customer : MonoBehaviour
                 grid.ArrayGrid[curX, curY].GetComponent<Square>().isEmpty = true;
                 curY++;
                 grid.ArrayGrid[curX, curY].GetComponent<Square>().isEmpty = false;
+
+                // -10 per move
+                scoreboard.Score -= 10;
             }
         }
         // RIGHT
@@ -180,6 +190,9 @@ public class Customer : MonoBehaviour
                 grid.ArrayGrid[curX, curY].GetComponent<Square>().isEmpty = true;
                 curX++;
                 grid.ArrayGrid[curX, curY].GetComponent<Square>().isEmpty = false;
+
+                // -10 per move
+                scoreboard.Score -= 10;
             }
         }
         else

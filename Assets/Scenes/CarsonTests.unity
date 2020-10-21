@@ -313,6 +313,10 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 1506576234}
+    - target: {fileID: 8097702622354180570, guid: 6aea049372d15d14a9fef39d91768b18, type: 3}
+      propertyPath: scoreboard
+      value: 
+      objectReference: {fileID: 528273381}
     - target: {fileID: 8097702622354180580, guid: 6aea049372d15d14a9fef39d91768b18, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.15
@@ -343,7 +347,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8097702622354180580, guid: 6aea049372d15d14a9fef39d91768b18, type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 8097702622354180580, guid: 6aea049372d15d14a9fef39d91768b18, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -963,7 +967,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 777801121660147302, guid: c92918163bdfbc440bba49121066b062, type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 777801121660147302, guid: c92918163bdfbc440bba49121066b062, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1001,6 +1005,10 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 1290272285}
+    - target: {fileID: 7879368736609982709, guid: c92918163bdfbc440bba49121066b062, type: 3}
+      propertyPath: scoreboard
+      value: 
+      objectReference: {fileID: 528273381}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c92918163bdfbc440bba49121066b062, type: 3}
 --- !u!1 &1105890943
@@ -1065,7 +1073,7 @@ Transform:
   - {fileID: 1378713670}
   - {fileID: 603921713}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1183586745
 GameObject:
@@ -1402,6 +1410,10 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 570340420}
+    - target: {fileID: 123195702934700342, guid: 48bb828b86a15c04fb37e1f401a67515, type: 3}
+      propertyPath: scoreboard
+      value: 
+      objectReference: {fileID: 528273381}
     - target: {fileID: 3165494587246420038, guid: 48bb828b86a15c04fb37e1f401a67515, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.15
@@ -1896,7 +1908,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1639686286
 PrefabInstance:
@@ -2215,7 +2227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1949683527560985558, guid: 86d94933ca9879748bc6961dbe9a72e1, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1949683527560985558, guid: 86d94933ca9879748bc6961dbe9a72e1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2249,6 +2261,10 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 242577579}
+    - target: {fileID: 5910335427999663644, guid: 86d94933ca9879748bc6961dbe9a72e1, type: 3}
+      propertyPath: scoreboard
+      value: 
+      objectReference: {fileID: 528273381}
     - target: {fileID: 6552246289482424453, guid: 86d94933ca9879748bc6961dbe9a72e1, type: 3}
       propertyPath: m_Name
       value: Villager
@@ -2537,7 +2553,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2098643047 stripped
 MonoBehaviour:
