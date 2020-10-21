@@ -4,7 +4,13 @@ using UnityEngine;
 
 /// <summary>
 /// An object that the player can move.
-/// Could parent other classes (like a bard class or something).
+/// Contents:
+/// Start
+/// Update
+/// OnMouseDown: Selects the object when clicked.
+/// MoveObject: Physically moves the object along the grid.
+/// FreeMoveCheck: Checks if a given tile is okay to move into.
+/// Collision Detection: Checks if colliding with another Object (based on tag)
 /// </summary>
 public class MoveableObject : MonoBehaviour
 {
@@ -63,12 +69,7 @@ public class MoveableObject : MonoBehaviour
     }
 
     #endregion
-    /*Methods:
-     * Start
-     * Update
-     * OnMouseDown
-     * MoveObject
-     * CheckMoveCheck*/
+
 
     // Start is called before the first frame update
     void Start()
@@ -76,9 +77,6 @@ public class MoveableObject : MonoBehaviour
         //Get managers/other dependencies
         manager = FindObjectOfType<MoveableManager>(); //Search for manager in the scene
         grid = manager.grid; //Grab grid from manager
-        //Moves object to its starting location
-
-
         isColliding = false;
     }
 
@@ -89,19 +87,15 @@ public class MoveableObject : MonoBehaviour
         transform.position = grid.ArrayGrid[xPosition, yPosition].GetComponent<Square>().Position;
     }
 
-    // What happens when the mouse button is clicked.
     private void OnMouseDown()
+    //Called when the left mouse button is clicked within this object's collider.
+    //Effect: Selects the object if it is unselected, unselects it if it is already selected.
     {
         // If the object is in the air...
         if (isLifted)
         {
-            //If intersecting another object, don't allow player to place object.
-            if(isColliding)
-            {
-                return;
-            }
-            //Otherwise put object down 
-            else
+            //If intersecting another object, don't allow player to place object. Otherwise put object down 
+            if (!isColliding)
             {
                 // Put it down.
                 isLifted = false;
@@ -141,8 +135,6 @@ public class MoveableObject : MonoBehaviour
     {
         //Mark current tiles taken up as empty
         grid.ArrayGrid[xPosition, yPosition].GetComponent<Square>().isEmpty = true;
-        //How to do this based on height and width...
-
         //Adds the amount we are moving by to the position so we know what part of the grid to move to.
         int xToMoveTo = xPosition + x;
         int yToMoveTo = yPosition + y;
@@ -153,27 +145,24 @@ public class MoveableObject : MonoBehaviour
         yPosition = yToMoveTo;
         //Mark the squares that are taken up as NOT empty
         grid.ArrayGrid[xPosition, yPosition].GetComponent<Square>().isEmpty = false;
-            //How to do this based on height and width...
-            //for(int i = -width/2; i<width/2; i++)
     }
 
     public bool FreeMoveCheck(int x, int y)
-    //Effect: Checks if the tile moving into is free (***Also going to need to make this check work so that it is okay with it being occupied by another object in its group)
     //Called in: MoveableManager
+    //Effect: Checks if the tile to move to is free. Returns true if it is free, returns false if it is not.
+    //Arguments: x, y are the amount to move by, not exact coordinates in the grid (those are calculated in this method)
     {
         //Adds the amount we are moving by to the position so we know what part of the grid to move to.
         int xToMove = xPosition + x;
         int yToMove = yPosition + y;
         //Return true if the tile is empty, and if it's not a wall.
-        if (((xToMove < grid.gridSize.x) && (xToMove > -1) && (yToMove < grid.gridSize.y) && (yToMove > -1)) && grid.ArrayGrid[xToMove, yToMove].GetComponent<Square>().isEmpty)
+        if (((xToMove < grid.gridSize.x) && (xToMove > 0) && (yToMove < grid.gridSize.y) && (yToMove > -1)) && grid.ArrayGrid[xToMove, yToMove].GetComponent<Square>().isEmpty)
         {
             return true;
         }
         //Return false if the tile is occupied
         else
         {
-            //Double check that it's not a part of its height/width
-
             //Double check that it's not one of the attached objects in that tile--if it is, that object will also move so it's technically free.
             if (associatedObjects != null)
             {
@@ -198,46 +187,30 @@ public class MoveableObject : MonoBehaviour
         {
             isColliding = true;
             //Set color to red so player knows they can't set the object down there.
-            if(this==manager.selectedObject)
+            if (this == manager.selectedObject || manager.selectedObject.associatedObjects.Contains(this))
             {
-                this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.red);
-                for (int i = 0; i < associatedObjects.Count; i++)
-                {
-                    associatedObjects[i].GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.red);
-                }
-            }
-            //If this is an object attached to the selected object, don't let them put the selected object down.
-            else if(manager.selectedObject.associatedObjects.Contains(this))
-            {
-                manager.selectedObject.isColliding = true;
                 manager.selectedObject.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.red);
-                for (int i = 0; i < manager.selectedObject.associatedObjects.Count; i++)
+                if(manager.selectedObject.associatedObjects!=null)
                 {
-                    manager.selectedObject.associatedObjects[i].GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.red);
+                    for (int i = 0; i < manager.selectedObject.associatedObjects.Count; i++)
+                    {
+                        manager.selectedObject.associatedObjects[i].GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.red);
+                    }
                 }
             }
         }
     }
+    private void OnCollisionExit2D(Collision2D other)
     //Effect: Sets colliding bool to true which is used in OnMouseDown()
     //Called whenever there a collision ends
-    private void OnCollisionExit2D(Collision2D other)
     {
         if (other.gameObject.tag == "Object")
         {
             isColliding = false;
             //Sets color back to default
-            if(this==manager.selectedObject)
+            if(this==manager.selectedObject || manager.selectedObject.associatedObjects.Contains(this))
             {
-               this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
-                for (int i = 0; i < associatedObjects.Count; i++)
-                {
-                    associatedObjects[i].GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
-                }
-            }
-            else if (manager.selectedObject.associatedObjects.Contains(this))
-            {
-                manager.selectedObject.isColliding = false;
-                manager.selectedObject.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan    );
+                manager.selectedObject.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
                 for (int i = 0; i < manager.selectedObject.associatedObjects.Count; i++)
                 {
                     manager.selectedObject.associatedObjects[i].GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
