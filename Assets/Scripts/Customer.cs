@@ -8,12 +8,13 @@ public class Customer : MonoBehaviour
 {
     //~~~Public Fields~~~
     public float speed = 0.003f;
-    public Grid grid;
+    public Grid grid;    
 
     //~~~Private Fields~~~
     private bool activePlaying = false;
     private Vector3 pos;
     private PauseTest pauseMenu;
+    private Onboarding onboard;
 
     // Carson Fields
     private float tileDistance = .16f;
@@ -43,6 +44,7 @@ public class Customer : MonoBehaviour
     {
         pos = this.transform.position;
         pauseMenu = FindObjectOfType<PauseTest>();
+        onboard = FindObjectOfType<Onboarding>();
 
         // Casron Code
         // Call move every .3s
@@ -52,6 +54,9 @@ public class Customer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Display the move instructions
+        onboard.SetBubbleActive(2, onboard.MoveInstruct);
+
         if (!pauseMenu.Paused)
         {
             pos = this.transform.position;
@@ -243,7 +248,13 @@ public class Customer : MonoBehaviour
     {
         // Up
         if (Input.GetKeyDown(KeyCode.W))
+        {
             dir[0] = true;
+            //Turn off the move instructions once the player hits W or D
+            //Then set the table bool to true to be able to be displayed back in the level manager class
+            onboard.MoveInstruct = false;
+            onboard.TableInstruct = true;
+        }
         // Left
         if (Input.GetKeyDown(KeyCode.A))
             dir[1] = true;
@@ -252,7 +263,11 @@ public class Customer : MonoBehaviour
             dir[2] = true;
         // Right
         if (Input.GetKeyDown(KeyCode.D))
+        {
             dir[3] = true;
+            onboard.MoveInstruct = false;
+            onboard.TableInstruct = true;
+        }
     }
 
     // Returns false for button released
