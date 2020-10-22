@@ -42,8 +42,8 @@ public class PausePlay : MonoBehaviour
         }*/
     }
 
-    void OnMouseDown()
-    {        
+    public void OnMouseDown()
+    {
         clicked = true;   
     }
 }

@@ -180,7 +180,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d53150893a3229848b06a49a811f3f26, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a4315823a65345b46ba309ba07aed9ca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -200,7 +200,7 @@ Transform:
   m_GameObject: {fileID: 45744749}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.3772694, y: 1.3772694, z: 1.3772694}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -258,7 +258,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7.6734295
+  orthographic size: 1.087122
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -297,11 +297,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3051637095321550120, guid: 2686a9d41e726e441a0b4905b1d92bc8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.31
+      value: -1.8
       objectReference: {fileID: 0}
     - target: {fileID: 3051637095321550120, guid: 2686a9d41e726e441a0b4905b1d92bc8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.91
+      value: -0.494
       objectReference: {fileID: 0}
     - target: {fileID: 3051637095321550120, guid: 2686a9d41e726e441a0b4905b1d92bc8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -341,19 +341,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3051637095321550120, guid: 2686a9d41e726e441a0b4905b1d92bc8, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.7936519
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3051637095321550120, guid: 2686a9d41e726e441a0b4905b1d92bc8, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.7936519
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3051637095321550120, guid: 2686a9d41e726e441a0b4905b1d92bc8, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.7936519
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8715841638138110475, guid: 2686a9d41e726e441a0b4905b1d92bc8, type: 3}
       propertyPath: m_Name
       value: BackButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138139556009336188, guid: 2686a9d41e726e441a0b4905b1d92bc8, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.011374012
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138139556009336188, guid: 2686a9d41e726e441a0b4905b1d92bc8, type: 3}
+      propertyPath: m_Size.y
+      value: 0.60994244
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138139556009336188, guid: 2686a9d41e726e441a0b4905b1d92bc8, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.011800647
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138139556009336188, guid: 2686a9d41e726e441a0b4905b1d92bc8, type: 3}
+      propertyPath: m_Size.x
+      value: 0.5152519
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2686a9d41e726e441a0b4905b1d92bc8, type: 3}

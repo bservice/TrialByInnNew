@@ -125,8 +125,8 @@ public class Onboarding : MonoBehaviour
     //Updates the position of the bubble so it is near the host
     public void SetPosition()
     {
-        xPos = host.transform.position.x + 0.4384f;
-        yPos = host.transform.position.y + 0.3379f;
+        xPos = host.transform.position.x + 0.5494f;
+        yPos = host.transform.position.y + 0.4139f;
 
         for(int i = 0; i < bubbles.Count; i++)
         {
