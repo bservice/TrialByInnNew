@@ -37,8 +37,8 @@ public class PauseTest : MonoBehaviour
                 pauseMenu.transform.position = new Vector3(100.0f, 100.0f, 0.0f);
                 playButton.transform.position = new Vector3(100.0f, 100.0f, 0.0f);
                 exitButton.transform.position = new Vector3(100.0f, 100.0f, 0.0f);
-                playButton.GetComponent<BoxCollider2D>().transform.position = new Vector3(100.0f, 100.0f, 0.0f);
-                exitButton.GetComponent<BoxCollider2D>().transform.position = new Vector3(100.0f, 100.0f, 0.0f);
+                //playButton.GetComponent<BoxCollider2D>().transform.position = new Vector3(100.0f, 100.0f, 0.0f);
+                //exitButton.GetComponent<BoxCollider2D>().transform.position = new Vector3(100.0f, 100.0f, 0.0f);
                 paused = false;
                 playButton.GetComponent<PausePlay>().Clicked = false;
             }
@@ -53,8 +53,8 @@ public class PauseTest : MonoBehaviour
                 pauseMenu.transform.position = new Vector3(0.024f, -0.097f, 1);
                 playButton.transform.position = new Vector3(-0.269f, -0.276f, 1);
                 exitButton.transform.position = new Vector3(0.342f, -0.276f, 1);
-                playButton.GetComponent<BoxCollider2D>().transform.position = new Vector3(-0.269f, -0.276f, 1);
-                exitButton.GetComponent<BoxCollider2D>().transform.position = new Vector3(0.342f, -0.276f, 1);
+                //playButton.GetComponent<BoxCollider2D>().transform.position = new Vector3(-0.269f, -0.276f, 1);
+                //exitButton.GetComponent<BoxCollider2D>().transform.position = new Vector3(0.342f, -0.276f, 1);
             }
         }
     }
