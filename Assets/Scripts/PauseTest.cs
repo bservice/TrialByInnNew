@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseTest : MonoBehaviour
 {
@@ -37,10 +38,14 @@ public class PauseTest : MonoBehaviour
                 pauseMenu.transform.position = new Vector3(100.0f, 100.0f, 0.0f);
                 playButton.transform.position = new Vector3(100.0f, 100.0f, 0.0f);
                 exitButton.transform.position = new Vector3(100.0f, 100.0f, 0.0f);
-                //playButton.GetComponent<BoxCollider2D>().transform.position = new Vector3(100.0f, 100.0f, 0.0f);
-                //exitButton.GetComponent<BoxCollider2D>().transform.position = new Vector3(100.0f, 100.0f, 0.0f);
                 paused = false;
                 playButton.GetComponent<PausePlay>().Clicked = false;
+            }
+            //Change scene if exit is pressed
+            if(exitButton.GetComponent<PausePlay>().Clicked)
+            {
+                exitButton.GetComponent<PausePlay>().Clicked = false;
+                SceneManager.LoadScene("SampleScene");
             }
         }
         else
