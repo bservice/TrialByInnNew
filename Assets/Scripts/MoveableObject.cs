@@ -88,9 +88,11 @@ public class MoveableObject : MonoBehaviour
 
         //Puts the object at the world position of their current tile (mostly used to get it in the right place at the start)
         transform.position = grid.ArrayGrid[xPosition, yPosition].GetComponent<Square>().Position;
+        //Grab vector2 for cursor to use in AABB math
         cursorPosition = Input.mousePosition;
         cursorPosition = Camera.main.ScreenToWorldPoint(cursorPosition);
 
+        //Selection for objects
         if(Input.GetMouseButtonDown(0))
         {
             //AABB collision test for cursor
@@ -214,7 +216,7 @@ public class MoveableObject : MonoBehaviour
         int xToMove = xPosition + x;
         int yToMove = yPosition + y;
         //Return true if the tile is empty, and if it's not a wall.
-        if (((xToMove < grid.gridSize.x) && (xToMove > 0) && (yToMove < grid.gridSize.y) && (yToMove > -1)) && grid.ArrayGrid[xToMove, yToMove].GetComponent<Square>().isEmpty)
+        if (((xToMove < grid.gridSize.x) && (xToMove > -1) && (yToMove < grid.gridSize.y) && (yToMove > -1)) && grid.ArrayGrid[xToMove, yToMove].GetComponent<Square>().isEmpty)
         {
             return true;
         }
