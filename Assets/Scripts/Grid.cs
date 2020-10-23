@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 /// <summary>
@@ -14,8 +15,12 @@ public class Grid : MonoBehaviour
     public GameObject spot;
     // The size of the boxes.
     public float size;
+    //Queque ref
+    public CustomerQueque queRef;
     // The matrix of squares.
     private GameObject[,] squares;
+    //The Targets for the player
+    private Vector2[] targets;
     #endregion
 
     #region Properties
@@ -36,6 +41,10 @@ public class Grid : MonoBehaviour
     public GameObject[,] ArrayGrid 
     { 
         get { return squares; } 
+    }
+    public Vector2[] Targets
+    {
+        get { return targets; }
     }
     #endregion
 
@@ -58,12 +67,41 @@ public class Grid : MonoBehaviour
             }
             yPos += size;
             xPos = -((xAxisLength * size) / 2);
+            
         }
+
+        targets = new Vector2[5];
+        populateTargets();
+        Debug.Log(squares[1, 1]);
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    void populateTargets()
+    {
+        for(int i = 0; i < 5; i++)
+        {
+            Vector2 temp;
+            temp.x = Random.Range(1, 14);
+            temp.y = Random.Range(1, 9);
+
+            if (i != 0 && temp.x == targets[i-1].x)
+            {
+                temp.x = Random.Range(1, 14);
+            }
+
+            if (i != 0 && temp.y == targets[i - 1].y)
+            {
+                temp.y = Random.Range(1, 9);
+            }
+
+            targets[i] = new Vector2(squares[(int)temp.x, (int)temp.y].GetComponent<Square>().position.x, squares[(int)temp.x, (int)temp.y].GetComponent<Square>().position.y);
+            Debug.Log(targets[i]);
+            squares[(int)temp.x, (int)temp.y].GetComponent<Square>().tar = true;
+        }
     }
 }
