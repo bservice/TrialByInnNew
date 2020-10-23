@@ -11,6 +11,8 @@ public class Square : MonoBehaviour
     private float size;
     // Whether or not the square has an object placed on it.
     private bool empty;
+    //If a target
+    public bool tar = false;
     #endregion
 
     #region Properties
@@ -53,22 +55,35 @@ public class Square : MonoBehaviour
     {
         size = 1.0f;
         empty = true;
+
         // Setting the squares to be off by default.
         this.GetComponent<SpriteRenderer>().enabled = false;
         
+        if(tar)
+        {
+            this.GetComponent<SpriteRenderer>().enabled = true;
+            this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.blue);
+            this.GetComponent<SpriteRenderer>().enabled = false;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.position = position;
+        if (tar)
+        {
+            this.GetComponent<SpriteRenderer>().enabled = true;
+            this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.blue);
+        }
     }
 
     // What happens when the mouse hovers over a square.
     private void OnMouseOver()
     {
         this.GetComponent<SpriteRenderer>().enabled = true;
-        //this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.red);
+        this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.red);
+        Debug.Log(this.position);
     }
 
     // What happens when the mouse exits a square.
