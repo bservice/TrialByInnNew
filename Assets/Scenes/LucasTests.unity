@@ -441,6 +441,7 @@ MonoBehaviour:
   gridSize: {x: 15, y: 10}
   spot: {fileID: 1688223056145400690, guid: 1772431c673d4834ab00acc5c10e7a20, type: 3}
   size: 0.16
+  queRef: {fileID: 1663588494}
 --- !u!4 &205848648
 Transform:
   m_ObjectHideFlags: 0
@@ -1137,8 +1138,8 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   isLifted: 0
   isColliding: 0
-  xPosition: 1
-  yPosition: 1
+  xPosition: 7
+  yPosition: 5
   associatedObjects:
   - {fileID: 0}
 --- !u!212 &885046327
@@ -1663,6 +1664,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 1125736623}
   scoreboard: {fileID: 1881104090}
   onboard: {fileID: 1483137590}
+  gridref: {fileID: 205848647}
 --- !u!4 &1260408672
 Transform:
   m_ObjectHideFlags: 0
