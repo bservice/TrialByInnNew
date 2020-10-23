@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour
     public PauseTest pauseMenu;
     public GameUIDisplay scoreboard;
     public Onboarding onboard;
+    public Grid gridref;
 
     //~~~Private Fields~~~
     private Customer customerRef;
@@ -119,17 +120,31 @@ public class LevelManager : MonoBehaviour
             // Temp switches on Left Arrow Press
             if (Input.GetKeyDown(KeyCode.P))
             {
-                quequeRef.ShiftQueque();
-                // + 50 per seat
-                scoreboard.Score += 50;
-                scoreboard.PatronsSat++;
-                scoreboard.PatronsLeft--;
-                shift = false;
-                customerRef.ActivePlaying = false;
-                inProgress = false;
-                if(bonus2)
-                    bonus = true;
-                table = false;                
+                Debug.Log("C " + customerRef.transform.position);
+                for(int i = 0; i < gridref.Targets.Length; i++)
+                {
+                    Debug.Log("G " + gridref.Targets[i]);
+                    if (
+                        customerRef.transform.position.x <= gridref.Targets[i].x + 0.05 &&
+                        customerRef.transform.position.x >= gridref.Targets[i].x - 0.05 &&
+                        customerRef.transform.position.y <= gridref.Targets[i].y + 0.05 &&
+                        customerRef.transform.position.y >= gridref.Targets[i].y - 0.05)
+                    {
+                        Debug.Log("HIT");
+                        quequeRef.ShiftQueque();
+                        // + 50 per seat
+                        scoreboard.Score += 50;
+                        scoreboard.PatronsSat++;
+                        scoreboard.PatronsLeft--;
+                        shift = false;
+                        customerRef.ActivePlaying = false;
+                        inProgress = false;
+                        if (bonus2)
+                            bonus = true;
+                        table = false;
+                        return;
+                    }
+                }
             }
 
 
