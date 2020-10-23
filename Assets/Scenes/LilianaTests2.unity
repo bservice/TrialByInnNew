@@ -507,8 +507,8 @@ GameObject:
   - component: {fileID: 805020202}
   - component: {fileID: 805020201}
   - component: {fileID: 805020200}
-  - component: {fileID: 805020198}
   - component: {fileID: 805020199}
+  - component: {fileID: 805020198}
   m_Layer: 0
   m_Name: ObstacleTable
   m_TagString: Object
@@ -528,13 +528,13 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
-  m_Mass: 0.0001
+  m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0
-  m_GravityScale: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!61 &805020199
@@ -659,8 +659,8 @@ GameObject:
   - component: {fileID: 922334261}
   - component: {fileID: 922334260}
   - component: {fileID: 922334259}
-  - component: {fileID: 922334257}
   - component: {fileID: 922334258}
+  - component: {fileID: 922334257}
   m_Layer: 0
   m_Name: DefaultTable
   m_TagString: Object
@@ -680,13 +680,13 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
-  m_Mass: 0.0001
+  m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0
-  m_GravityScale: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!61 &922334258

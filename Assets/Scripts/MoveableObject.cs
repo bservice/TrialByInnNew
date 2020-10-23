@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.WSA;
 
 /// <summary>
 /// An object that the player can move.
@@ -11,7 +12,7 @@ using UnityEngine;
 /// MoveObject: Physically moves the object along the grid.
 /// FreeMoveCheck: Checks if a given tile is okay to move into.
 /// Collision Detection: Checks if colliding with another Object (based on tag)
-/// </summary>
+/// </summary>  
 public class MoveableObject : MonoBehaviour
 {
     #region Fields
@@ -32,6 +33,7 @@ public class MoveableObject : MonoBehaviour
     /*public int width; //How many tiles wide the object is
     public int height; //How many tiles tall the object is*/
     public List<MoveableObject> associatedObjects; //List full of the friends of the object that move with it
+    Vector2 cursorPosition;
     //public Vector2 position;
     #endregion
     #region Properties
@@ -83,10 +85,66 @@ public class MoveableObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         //Puts the object at the world position of their current tile (mostly used to get it in the right place at the start)
         transform.position = grid.ArrayGrid[xPosition, yPosition].GetComponent<Square>().Position;
-    }
+        cursorPosition = Input.mousePosition;
+        cursorPosition = Camera.main.ScreenToWorldPoint(cursorPosition);
 
+        if(Input.GetMouseButtonDown(0))
+        {
+            //AABB collision test for cursor
+
+            if (cursorPosition.x < this.GetComponent<BoxCollider2D>().bounds.max.x && cursorPosition.x > this.GetComponent<BoxCollider2D>().bounds.min.x)
+            {
+                //Potential collision!
+                //Check the next condition in a nested if statement, just to not have a ton of &'s and to be more efficient
+                if (cursorPosition.y > this.GetComponent<BoxCollider2D>().bounds.min.y && cursorPosition.y < this.GetComponent<BoxCollider2D>().bounds.max.y)
+                {
+                    //Collision!
+                    // If the object is in the air...
+                    if (isLifted)
+                    {
+                        //If intersecting another object, don't allow player to place object. Otherwise put object down 
+                        if (!isColliding)
+                        {
+                            // Put it down.
+                            isLifted = false;
+                            //Set color of all associated objects to default color
+                            this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.white);
+                            for (int i = 0; i < associatedObjects.Count; i++)
+                            {
+                                associatedObjects[i].GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.white);
+                            }
+                            //Unselect the Object. 
+                            manager.selectedObject = null;
+                        }
+                    }
+                    // If the object is on the ground...
+                    else
+                    {
+                        //If you don't have another object selected
+                        if (manager.selectedObject == null)
+                        {
+                            // Lift it up.
+                            isLifted = true;
+                            //Change color of all associated objects to cyan
+                            this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
+                            for (int i = 0; i < associatedObjects.Count; i++)
+                            {
+                                associatedObjects[i].GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
+                            }
+                            //Select the object.
+                            manager.selectedObject = this;
+                        }
+                    }
+                }
+
+            }
+
+        }
+    }
+    /*
     private void OnMouseDown()
     //Called when the left mouse button is clicked within this object's collider.
     //Effect: Selects the object if it is unselected, unselects it if it is already selected.
@@ -127,7 +185,7 @@ public class MoveableObject : MonoBehaviour
                 manager.selectedObject = this;
             }   
         }
-    }
+    }*/
 
     public void MoveObject(int x, int y)
     //Effect: Moves the object to a new position based on xy grid position
