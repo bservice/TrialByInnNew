@@ -23,8 +23,8 @@ public class LevelManager : MonoBehaviour
     private bool click;
     private bool table;
     private bool table2;
-    private bool bonus;
-    private bool bonus2;
+    private bool tableMove;
+    private bool tableMove2;
 
 
     // Start is called before the first frame update
@@ -37,8 +37,8 @@ public class LevelManager : MonoBehaviour
         timeLeft2 = 5.0f;
         click = false;
         table2 = true;
-        bonus = false;
-        bonus2 = true;
+        tableMove = false;
+        tableMove2 = true;
     }
 
     // Update is called once per frame
@@ -48,7 +48,7 @@ public class LevelManager : MonoBehaviour
         onboard.SetBubbleActive(0, welcome);
         onboard.SetBubbleActive(1, click);
         onboard.SetBubbleActive(3, table);
-        onboard.SetBubbleActive(4, bonus);
+        onboard.SetBubbleActive(4, tableMove);
 
         //Only run the game loop if not paused
         if (!pauseMenu.Paused)
@@ -60,15 +60,15 @@ public class LevelManager : MonoBehaviour
                 table2 = false;
             }
 
-            //Start a timer to turn off the bonus bubble if it is active
-            if(bonus)
+            //Start a timer to turn off the tableMove bubble if it is active
+            if(tableMove)
             {
                 timeLeft2 -= Time.deltaTime;
 
                 if (timeLeft2 <= 0.0f)
                 {
-                    bonus = false;
-                    bonus2 = false;
+                    tableMove = false;
+                    tableMove2 = false;
                 }
             }
 
@@ -139,8 +139,8 @@ public class LevelManager : MonoBehaviour
                         shift = false;
                         customerRef.ActivePlaying = false;
                         inProgress = false;
-                        if (bonus2)
-                            bonus = true;
+                        if (tableMove2)
+                            tableMove = true;
                         table = false;
                         return;
                     }

@@ -9,9 +9,7 @@ public class Onboarding : MonoBehaviour
     private bool clickInstruct;
     private bool moveInstruct;
     private bool tableInstruct;
-    private bool bonus;
-    private bool correctSeat;
-    private bool wrongSeat;
+    private bool tableMove;
 
     //GameObject to hold the host
     public GameObject host;
@@ -59,28 +57,12 @@ public class Onboarding : MonoBehaviour
             tableInstruct = value;
         }
     }
-    public bool Bonus
+    public bool TableMove
     {
-        get { return bonus; }
+        get { return tableMove; }
         set
         {
-            bonus = value;
-        }
-    }
-    public bool CorrectSeat
-    {
-        get { return correctSeat; }
-        set
-        {
-            correctSeat = value;
-        }
-    }
-    public bool WrongSeat
-    {
-        get { return wrongSeat; }
-        set
-        {
-            wrongSeat = value;
+            tableMove = value;
         }
     }
 
@@ -92,16 +74,12 @@ public class Onboarding : MonoBehaviour
         clickInstruct = false;
         moveInstruct = false;
         tableInstruct = false;
-        bonus = false;
-        correctSeat = false;
-        wrongSeat = false;
+        tableMove = false;
         SetBubbleActive(0, welcome);
         SetBubbleActive(1, clickInstruct);
         SetBubbleActive(2, moveInstruct);
         SetBubbleActive(3, tableInstruct);
-        SetBubbleActive(4, bonus);
-        SetBubbleActive(5, correctSeat);
-        SetBubbleActive(6, wrongSeat);
+        SetBubbleActive(4, tableMove);
         xPos = host.transform.position.x;
         yPos = host.transform.position.y;
         prevHostPos = host.transform.position;
@@ -131,6 +109,10 @@ public class Onboarding : MonoBehaviour
         for(int i = 0; i < bubbles.Count; i++)
         {
             bubbles[i].transform.position = new Vector3(xPos, yPos);
+            if (i == 4)
+            {
+                bubbles[i].transform.position = new Vector3(xPos - 0.5494f + 1.0304f, yPos - 0.4139f + 0.3459f);
+            }
         }
     }
 
