@@ -44,6 +44,7 @@ public class PausePlay : MonoBehaviour
 
     public void OnMouseDown()
     {
+        Debug.Log("click");
         clicked = true;   
     }
 }

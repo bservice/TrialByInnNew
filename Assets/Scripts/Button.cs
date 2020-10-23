@@ -19,7 +19,7 @@ public class Button : MonoBehaviour
 
     }
 
-    void OnMouseDown()
+    public void OnMouseDown()
     {
         gameObject.GetComponent<SpriteRenderer>().color = new Color(210f /255f, 198f / 255f, 140f / 255f);
         SceneManager.LoadScene(sceneName);
