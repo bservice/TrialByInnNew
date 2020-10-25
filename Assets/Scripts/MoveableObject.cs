@@ -28,6 +28,10 @@ public class MoveableObject : MonoBehaviour
     //Whether or not the object is colliding with another object
     public bool isColliding;
 
+    //Audio variables
+    private AudioSource soundEffect;
+    public AudioClip moveTable;
+
     public int xPosition; //Holds what x position in the grid the object is on
     public int yPosition; //Holds what y position in the grid the object is on
     /*public int width; //How many tiles wide the object is
@@ -80,6 +84,7 @@ public class MoveableObject : MonoBehaviour
         manager = FindObjectOfType<MoveableManager>(); //Search for manager in the scene
         grid = manager.grid; //Grab grid from manager
         isColliding = false;
+        soundEffect = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -205,6 +210,8 @@ public class MoveableObject : MonoBehaviour
         yPosition = yToMoveTo;
         //Mark the squares that are taken up as NOT empty
         grid.ArrayGrid[xPosition, yPosition].GetComponent<Square>().isEmpty = false;
+        //Play table sound
+        soundEffect.PlayOneShot(moveTable);
     }
 
     public bool FreeMoveCheck(int x, int y)

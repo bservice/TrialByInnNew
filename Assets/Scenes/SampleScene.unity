@@ -327,7 +327,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 568890424}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.894, y: 0.306, z: -3.4356513}
+  m_LocalPosition: {x: 4.014, y: 0.794, z: -3.4356513}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -734,7 +734,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5caebe2b8af0adf45b37828ce9ee00cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 8300000, guid: 7854f1b4f370a494382eb3f2f64e69fa, type: 3}
   sceneName: CreditsScene
 --- !u!61 &1324653147
 BoxCollider2D:
@@ -1076,7 +1075,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 717deddcd330a2c4a8269e528dbcdfa1, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.535
+  m_Volume: 0.228
   m_Pitch: 1
   Loop: 1
   Mute: 0

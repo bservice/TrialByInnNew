@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
     public GameUIDisplay scoreboard;
     public Onboarding onboard;
     public Grid gridref;
+    public AudioClip chair;
 
     //~~~Private Fields~~~
     private Customer customerRef;
@@ -25,6 +26,7 @@ public class LevelManager : MonoBehaviour
     private bool table2;
     private bool tableMove;
     private bool tableMove2;
+    private AudioSource soundEffect;
 
 
     // Start is called before the first frame update
@@ -39,6 +41,7 @@ public class LevelManager : MonoBehaviour
         table2 = true;
         tableMove = false;
         tableMove2 = true;
+        soundEffect = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -142,6 +145,7 @@ public class LevelManager : MonoBehaviour
                         if (tableMove2)
                             tableMove = true;
                         table = false;
+                        soundEffect.PlayOneShot(chair);
                         return;
                     }
                 }

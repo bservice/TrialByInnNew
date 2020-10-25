@@ -8,13 +8,15 @@ public class Customer : MonoBehaviour
 {
     //~~~Public Fields~~~
     public float speed = 0.003f;
-    public Grid grid;    
+    public Grid grid;
+    public AudioClip step;
 
     //~~~Private Fields~~~
     private bool activePlaying = false;
     private Vector3 pos;
     private PauseTest pauseMenu;
     private Onboarding onboard;
+    private AudioSource soundEffect;
 
     // Carson Fields
     private float tileDistance = .16f;
@@ -46,6 +48,7 @@ public class Customer : MonoBehaviour
         pos = this.transform.position;
         pauseMenu = FindObjectOfType<PauseTest>();
         onboard = FindObjectOfType<Onboarding>();
+        soundEffect = GetComponent<AudioSource>();
 
         // Carson Code
         // Call move every .3s
@@ -127,6 +130,9 @@ public class Customer : MonoBehaviour
 
                 // -10 per move
                 scoreboard.Score -= 10;
+
+                //Play sound every move
+                soundEffect.PlayOneShot(step);
             }
         }
         //LEFT
@@ -149,6 +155,9 @@ public class Customer : MonoBehaviour
 
                 // -10 per move
                 scoreboard.Score -= 10;
+
+                //Play sound every move
+                soundEffect.PlayOneShot(step);
             }
         }
         // DOWN
@@ -171,6 +180,9 @@ public class Customer : MonoBehaviour
 
                 // -10 per move
                 scoreboard.Score -= 10;
+
+                //Play sound every move
+                soundEffect.PlayOneShot(step);
             }
         }
         // RIGHT
@@ -193,6 +205,9 @@ public class Customer : MonoBehaviour
 
                 // -10 per move
                 scoreboard.Score -= 10;
+
+                //Play sound every move
+                soundEffect.PlayOneShot(step);
             }
         }
         else
