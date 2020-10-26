@@ -82,13 +82,6 @@ public class Grid : MonoBehaviour
         tables = new GameObject[5];
         populateTargets(queRef.size);
         Debug.Log(squares[1, 1]);
-        //populateTargets();
-        //Debug.Log(squares[1, 1]);
-
-
-        tables = new GameObject[5];
-        populateTargets(5);
-
     }
 
     // Update is called once per frame
