@@ -192,6 +192,42 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c92918163bdfbc440bba49121066b062, type: 3}
+--- !u!1 &135557154 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2657178268007731841, guid: ce98b394d1259f6429257988e6b9f37c, type: 3}
+  m_PrefabInstance: {fileID: 2657178266911153688}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &135557161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135557154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b8bf67f9f97caa47a99cfcab8df4a08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &135557162
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135557154}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8f167185b69307f479ee4a23e6b45d5b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &174411545
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,8 +681,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1523c955307355d469d05378feb078ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 378800132}
-  grid: {fileID: 0}
   selectable: 0
   position: {x: 0, y: 0}
   isLifted: 0
@@ -830,6 +864,8 @@ GameObject:
   - component: {fileID: 922334258}
   - component: {fileID: 922334257}
   - component: {fileID: 922334262}
+  - component: {fileID: 922334263}
+  - component: {fileID: 922334264}
   m_Layer: 0
   m_Name: DefaultTable
   m_TagString: Object
@@ -896,8 +932,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1523c955307355d469d05378feb078ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 378800132}
-  grid: {fileID: 0}
   selectable: 1
   position: {x: 0, y: 0}
   isLifted: 0
@@ -905,9 +939,7 @@ MonoBehaviour:
   moveTable: {fileID: 8300000, guid: e7c53bf33d710a8489bc829d618f6e76, type: 3}
   xPosition: 3
   yPosition: 3
-  associatedObjects:
-  - {fileID: 1181577502}
-  - {fileID: 927105086}
+  associatedObjects: []
 --- !u!212 &922334260
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1069,6 +1101,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &922334263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 922334256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b8bf67f9f97caa47a99cfcab8df4a08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &922334264
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 922334256}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1fd8398114239dd469993ec61426b943, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &927105085 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1069772736725576700, guid: c92918163bdfbc440bba49121066b062, type: 3}
@@ -1086,8 +1149,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1523c955307355d469d05378feb078ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
-  grid: {fileID: 0}
   selectable: 0
   position: {x: 0, y: 0}
   isLifted: 0
@@ -1128,8 +1189,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1523c955307355d469d05378feb078ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
-  grid: {fileID: 0}
   selectable: 0
   position: {x: 0, y: 1}
   isLifted: 0
@@ -1518,6 +1577,10 @@ PrefabInstance:
       propertyPath: selectable
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2657178268007731845, guid: ce98b394d1259f6429257988e6b9f37c, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 880644122584362245, guid: a1e4ce547a7adeb49b0e30f21347e1e2, type: 3}
     - target: {fileID: 2657178268007731847, guid: ce98b394d1259f6429257988e6b9f37c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

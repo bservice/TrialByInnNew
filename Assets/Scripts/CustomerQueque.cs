@@ -31,6 +31,7 @@ public class CustomerQueque : MonoBehaviour
 		index = -1;
 		innerArray = new Customer[size];
 		scoreboard.PatronsLeft = size;
+		Debug.Log(index);
 
 		//For each data spot in the queque fill with a random NPC
 		for (int i = 0; i < size; i++)
@@ -44,16 +45,20 @@ public class CustomerQueque : MonoBehaviour
 	{
 		if (!pauseMenu.Paused)
 		{
-			//Re-make the queque based on the level
-			if (oldLevel < level && IsEmpty())
+			if (IsEmpty() && scoreboard.PatronsSat == size)
 			{
-				size = 3 + (2 * level);
-				//For each data spot in the queque fill with a random NPC
-				for (int i = 0; i < size; i++)
-				{
-					GetRandomNPC();
-				}
-				oldLevel = level;
+				ResetBoard();
+				//Re-make the queque based on the level
+				//if (oldLevel < level)
+				//{
+					//size = 3 + (2 * level);
+					////For each data spot in the queque fill with a random NPC
+					//for (int i = 0; i < size; i++)
+					//{
+					//	GetRandomNPC();
+					//}
+					//oldLevel = level;
+				//}
 			}
 		}
 	}
@@ -62,7 +67,7 @@ public class CustomerQueque : MonoBehaviour
 	void Push(Customer npc)
 	{
 		index++;
-
+		Debug.Log(index);
 		//To see if the array is large enough to hold the data
 		if (size <= index)
 		{
@@ -120,6 +125,7 @@ public class CustomerQueque : MonoBehaviour
 			}
 
 			index--;
+			Debug.Log(index);
 			return temp;
 		}
 	}
@@ -211,6 +217,25 @@ public class CustomerQueque : MonoBehaviour
 			*/
 			pos.x += 0.16f;
 			innerArray[i].transform.position = pos;
+		}
+	}
+
+	//Reset the board with the new level
+	public void ResetBoard()
+	{
+		oldLevel = level;
+		level++;
+		size = 3 + (2 * level);
+		innerArray = new Customer[size];
+		scoreboard.PatronsLeft = size;
+		scoreboard.Score += 100;
+		Debug.Log(index);
+		
+
+		//For each data spot in the queque fill with a random NPC
+		for (int i = 0; i < size; i++)
+		{
+			GetRandomNPC();
 		}
 	}
 }
