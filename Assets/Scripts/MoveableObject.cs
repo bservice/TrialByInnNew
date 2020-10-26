@@ -18,18 +18,22 @@ public class MoveableObject : MonoBehaviour
 {
     #region Fields
     //GameObjects this is dependent on
-    private MoveableManager manager;
-    private Grid grid;
+    public MoveableManager manager;
+    public Grid grid;
     //Whether or not this object can be selected and moved
     public bool selectable;
     // The position of the top left corner of the square.
-    public Vector2 position;
+    private Vector2 position;
     // The size of the object in pixels.
     private Vector2 size;
     // Whether or not the object is being lifted.
-    public bool isLifted;
+    private bool isLifted;
     //Whether or not the object is colliding with another object
-    public bool isColliding;
+
+    private bool isColliding;
+    // For animations
+   //public Animator animator;
+
 
     //Audio variables
     private AudioSource soundEffect;
@@ -84,8 +88,8 @@ public class MoveableObject : MonoBehaviour
     void Start()
     {
         //Get managers/other dependencies
-        manager = FindObjectOfType<MoveableManager>(); //Search for manager in the scene
-        grid = manager.grid; //Grab grid from manager
+        //manager = FindObjectOfType<MoveableManager>(); //Search for manager in the scene
+        //grid = manager.grid; //Grab grid from manager
         isColliding = false;
         soundEffect = GetComponent<AudioSource>();
         
@@ -133,6 +137,7 @@ public class MoveableObject : MonoBehaviour
                             for (int i = 0; i < associatedObjects.Count; i++)
                             {
                                 associatedObjects[i].GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.white);
+                                this.GetComponent<Animator>().SetBool("", true);
                             }
                             //Unselect the Object. 
                             manager.selectedObject = null;
@@ -220,21 +225,26 @@ public class MoveableObject : MonoBehaviour
     }
 
     private void OnCollisionStay2D(Collision2D other)
-    //Effect: Sets colliding bool to true which is used in OnMouseDown()
+    //Effect: Sets colliding bool to true which is used in Update()
     //Called whenever there is a collision
     {
         if(other.gameObject.tag=="Object" || other.gameObject.tag == "Character" || other.gameObject.tag == "Wall") //So it doesn't happen with other misc colliders such as the grid tile's
         {
             isColliding = true;
             
+            //Checks if this object is an associated object
             bool objectContainedInList = false;
             if(manager.selectedObject.associatedObjects!=null)
             {
-                if (manager.selectedObject.associatedObjects.Contains(this))
+                if (manager.selectedObject.associatedObjects.Count > 0)
                 {
-                    objectContainedInList = true;   
+                    if (manager.selectedObject.associatedObjects.Contains(this))
+                    {
+                        objectContainedInList = true;
+                    }
                 }
             }
+           
             
             //Set color to red so player knows they can't set the object down there.
             if (this == manager.selectedObject || objectContainedInList)
@@ -258,8 +268,22 @@ public class MoveableObject : MonoBehaviour
         if (other.gameObject.tag == "Object" || other.gameObject.tag == "Character" || other.gameObject.tag == "Wall")
         {
             isColliding = false;
+
+            //Checks if this object is an associated object
+            bool objectContainedInList = false;
+            if (manager.selectedObject.associatedObjects != null)
+            {
+                if (manager.selectedObject.associatedObjects.Count > 0)
+                {
+                    if (manager.selectedObject.associatedObjects.Contains(this))
+                    {
+                        objectContainedInList = true;
+                    }
+                }
+            }
+
             //Sets color back to default
-            if(this==manager.selectedObject || manager.selectedObject.associatedObjects.Contains(this))
+            if (this==manager.selectedObject || objectContainedInList)
             {
                 manager.selectedObject.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
                 for (int i = 0; i < manager.selectedObject.associatedObjects.Count; i++)
