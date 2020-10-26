@@ -42,7 +42,7 @@ public class ButtonAudioManager : MonoBehaviour
     void Update()
     {
         //Only loop through scenes that are not the game scene (the game scene won't have any of this type of button)
-        if(SceneManager.GetActiveScene().name != "LucasTests" && SceneManager.GetActiveScene().name != "CarsonTests")
+        if(SceneManager.GetActiveScene().name != "LucasTests" && SceneManager.GetActiveScene().name != "CarsonTests" && SceneManager.GetActiveScene().name != "Grid")
         {
             //Keep finding all of the buttons in the scene
             sceneButtons = FindObjectsOfType<Button>();
