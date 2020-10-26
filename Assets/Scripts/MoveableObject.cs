@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.XR.WSA;
 
 /// <summary>
@@ -18,8 +19,8 @@ public class MoveableObject : MonoBehaviour
 {
     #region Fields
     //GameObjects this is dependent on
-    public MoveableManager manager;
-    public Grid grid;
+    private GameObject manager;
+    private GameObject grid;
     //Whether or not this object can be selected and moved
     public bool selectable;
     // The position of the top left corner of the square.
@@ -99,8 +100,9 @@ public class MoveableObject : MonoBehaviour
         grid.ArrayGrid[xPosition - 1, 9 - yPosition].GetComponent<Square>().isEmpty = true;
         grid.ArrayGrid[xPosition + 1, 9 - yPosition].GetComponent<Square>().isEmpty = true;
         */
-        grid = FindObjectOfType<Grid>();
-        manager = FindObjectOfType<MoveableManager>();
+        //hand = GameObject.Find("Hand");
+        grid = GameObject.Find("Grid");
+        manager = GameObject.Find("MoveableManager");
     }
 
     // Update is called once per frame
@@ -109,7 +111,7 @@ public class MoveableObject : MonoBehaviour
     {
 
         //Puts the object at the world position of their current tile (mostly used to get it in the right place at the start)
-        transform.position = grid.ArrayGrid[xPosition, yPosition].GetComponent<Square>().Position;
+        transform.position = grid.GetComponent<Grid>().ArrayGrid[xPosition, yPosition].GetComponent<Square>().Position;
         //Grab vector2 for cursor to use in AABB math
         cursorPosition = Input.mousePosition;
         cursorPosition = Camera.main.ScreenToWorldPoint(cursorPosition);
@@ -142,14 +144,14 @@ public class MoveableObject : MonoBehaviour
                                 this.GetComponent<Animator>().SetBool("", true);
                             }
                             //Unselect the Object. 
-                            manager.selectedObject = null;
+                            manager.GetComponent<MoveableManager>().selectedObject = null;
                         }
                     }
                     // If the object is on the ground...
                     else
                     {
                         //If you don't have another object selected
-                        if (manager.selectedObject == null)
+                        if (manager.GetComponent<MoveableManager>().selectedObject == null)
                         {
                             // Lift it up.
                             isLifted = true;
@@ -160,7 +162,7 @@ public class MoveableObject : MonoBehaviour
                                 associatedObjects[i].GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
                             }
                             //Select the object.
-                            manager.selectedObject = this;
+                            manager.GetComponent<MoveableManager>().selectedObject = this;
                         }
                     }
                 }
@@ -175,21 +177,21 @@ public class MoveableObject : MonoBehaviour
     //Called in: MoveableManager
     {
         //Mark current tiles taken up as empty
-        grid.ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = true;
-        grid.ArrayGrid[xPosition - 1, 9 - yPosition].GetComponent<Square>().isEmpty = true;
-        grid.ArrayGrid[xPosition + 1, 9 - yPosition].GetComponent<Square>().isEmpty = true;
+        grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = true;
+        grid.GetComponent<Grid>().ArrayGrid[xPosition - 1, 9 - yPosition].GetComponent<Square>().isEmpty = true;
+        grid.GetComponent<Grid>().ArrayGrid[xPosition + 1, 9 - yPosition].GetComponent<Square>().isEmpty = true;
         //Adds the amount we are moving by to the position so we know what part of the grid to move to.
         int xToMoveTo = xPosition + x;
         int yToMoveTo = yPosition + y;
         //Sets transform = the world position of that grid tile
-        transform.position = grid.ArrayGrid[xToMoveTo, yToMoveTo].GetComponent<Square>().Position;
+        transform.position = grid.GetComponent<Grid>().ArrayGrid[xToMoveTo, yToMoveTo].GetComponent<Square>().Position;
         //Set the grid position of the object to its new position
         xPosition = xToMoveTo;
         yPosition = yToMoveTo;
         //Mark the squares that are taken up as NOT empty
-        grid.ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = false;
-        grid.ArrayGrid[xPosition - 1, 9 - yPosition].GetComponent<Square>().isEmpty = false;
-        grid.ArrayGrid[xPosition + 1, 9 - yPosition].GetComponent<Square>().isEmpty = false;
+        grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = false;
+        grid.GetComponent<Grid>().ArrayGrid[xPosition - 1, 9 - yPosition].GetComponent<Square>().isEmpty = false;
+        grid.GetComponent<Grid>().ArrayGrid[xPosition + 1, 9 - yPosition].GetComponent<Square>().isEmpty = false;
         //Play table sound
         soundEffect.PlayOneShot(moveTable);
     }
@@ -203,7 +205,7 @@ public class MoveableObject : MonoBehaviour
         int xToMove = xPosition + x;
         int yToMove = yPosition + y;
         //Return true if the tile is empty, and if it's not a wall.
-        if (((xToMove < grid.gridSize.x) && (xToMove > -1) && (yToMove < grid.gridSize.y) && (yToMove > -1)) /*&& grid.ArrayGrid[xToMove, yToMove].GetComponent<Square>().isEmpty*/)
+        if (((xToMove < grid.GetComponent<Grid>().gridSize.x) && (xToMove > -1) && (yToMove < grid.GetComponent<Grid>().gridSize.y) && (yToMove > -1)) /*&& grid.ArrayGrid[xToMove, yToMove].GetComponent<Square>().isEmpty*/)
         {
             return true;
         }
@@ -236,11 +238,11 @@ public class MoveableObject : MonoBehaviour
             
             //Checks if this object is an associated object
             bool objectContainedInList = false;
-            if(manager.selectedObject.associatedObjects!=null)
+            if(manager.GetComponent<MoveableManager>().selectedObject.associatedObjects!=null)
             {
-                if (manager.selectedObject.associatedObjects.Count > 0)
+                if (manager.GetComponent<MoveableManager>().selectedObject.associatedObjects.Count > 0)
                 {
-                    if (manager.selectedObject.associatedObjects.Contains(this))
+                    if (manager.GetComponent<MoveableManager>().selectedObject.associatedObjects.Contains(this))
                     {
                         objectContainedInList = true;
                     }
@@ -249,15 +251,15 @@ public class MoveableObject : MonoBehaviour
            
             
             //Set color to red so player knows they can't set the object down there.
-            if (this == manager.selectedObject || objectContainedInList)
+            if (this == manager.GetComponent<MoveableManager>().selectedObject || objectContainedInList)
             {
                 Debug.Log("test");
-                manager.selectedObject.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.red);
-                if(manager.selectedObject.associatedObjects!=null)
+                manager.GetComponent<MoveableManager>().selectedObject.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.red);
+                if(manager.GetComponent<MoveableManager>().selectedObject.associatedObjects!=null)
                 {
-                    for (int i = 0; i < manager.selectedObject.associatedObjects.Count; i++)
+                    for (int i = 0; i < manager.GetComponent<MoveableManager>().selectedObject.associatedObjects.Count; i++)
                     {
-                        manager.selectedObject.associatedObjects[i].GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.red);
+                        manager.GetComponent<MoveableManager>().selectedObject.associatedObjects[i].GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.red);
                     }
                 }
             }
@@ -273,11 +275,11 @@ public class MoveableObject : MonoBehaviour
 
             //Checks if this object is an associated object
             bool objectContainedInList = false;
-            if (manager.selectedObject.associatedObjects != null)
+            if (manager.GetComponent<MoveableManager>().selectedObject.associatedObjects != null)
             {
-                if (manager.selectedObject.associatedObjects.Count > 0)
+                if (manager.GetComponent<MoveableManager>().selectedObject.associatedObjects.Count > 0)
                 {
-                    if (manager.selectedObject.associatedObjects.Contains(this))
+                    if (manager.GetComponent<MoveableManager>().selectedObject.associatedObjects.Contains(this))
                     {
                         objectContainedInList = true;
                     }
@@ -285,12 +287,12 @@ public class MoveableObject : MonoBehaviour
             }
 
             //Sets color back to default
-            if (this==manager.selectedObject || objectContainedInList)
+            if (this==manager.GetComponent<MoveableManager>().selectedObject || objectContainedInList)
             {
-                manager.selectedObject.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
-                for (int i = 0; i < manager.selectedObject.associatedObjects.Count; i++)
+                manager.GetComponent<MoveableManager>().selectedObject.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
+                for (int i = 0; i < manager.GetComponent<MoveableManager>().selectedObject.associatedObjects.Count; i++)
                 {
-                    manager.selectedObject.associatedObjects[i].GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
+                    manager.GetComponent<MoveableManager>().selectedObject.associatedObjects[i].GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
                 }
             }
         }
