@@ -78,9 +78,14 @@ public class Grid : MonoBehaviour
         }
 
         targets = new Vector2[5];
+<<<<<<< HEAD
         tables = new GameObject[5];
         populateTargets(queRef.size);
         Debug.Log(squares[1, 1]);
+=======
+        populateTargets();
+        //Debug.Log(squares[1, 1]);
+>>>>>>> 27e921807f5edd4cfe53814da5bbd83230711e94
     }
 
     // Update is called once per frame
@@ -113,7 +118,7 @@ public class Grid : MonoBehaviour
             }
 
             targets[i] = new Vector2(squares[(int)temp.x, (int)temp.y].GetComponent<Square>().position.x, squares[(int)temp.x, (int)temp.y].GetComponent<Square>().position.y);
-            Debug.Log(targets[i]);
+            //Debug.Log(targets[i]);
             squares[(int)temp.x, (int)temp.y].GetComponent<Square>().tar = true;
         }
 
