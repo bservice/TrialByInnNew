@@ -177,9 +177,9 @@ public class MoveableObject : MonoBehaviour
     //Called in: MoveableManager
     {
         //Mark current tiles taken up as empty
-        grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = true;
-        grid.GetComponent<Grid>().ArrayGrid[xPosition - 1, 9 - yPosition].GetComponent<Square>().isEmpty = true;
-        grid.GetComponent<Grid>().ArrayGrid[xPosition + 1, 9 - yPosition].GetComponent<Square>().isEmpty = true;
+        grid.GetComponent<Grid>().ArrayGrid[xPosition, yPosition].GetComponent<Square>().isEmpty = true;
+        grid.GetComponent<Grid>().ArrayGrid[xPosition, yPosition].GetComponent<Square>().isEmpty = true;
+        grid.GetComponent<Grid>().ArrayGrid[xPosition, yPosition].GetComponent<Square>().isEmpty = true;
         //Adds the amount we are moving by to the position so we know what part of the grid to move to.
         int xToMoveTo = xPosition + x;
         int yToMoveTo = yPosition + y;
@@ -189,9 +189,9 @@ public class MoveableObject : MonoBehaviour
         xPosition = xToMoveTo;
         yPosition = yToMoveTo;
         //Mark the squares that are taken up as NOT empty
-        grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = false;
-        grid.GetComponent<Grid>().ArrayGrid[xPosition - 1, 9 - yPosition].GetComponent<Square>().isEmpty = false;
-        grid.GetComponent<Grid>().ArrayGrid[xPosition + 1, 9 - yPosition].GetComponent<Square>().isEmpty = false;
+        grid.GetComponent<Grid>().ArrayGrid[xPosition, yPosition].GetComponent<Square>().isEmpty = false;
+        grid.GetComponent<Grid>().ArrayGrid[xPosition, yPosition].GetComponent<Square>().isEmpty = false;
+        grid.GetComponent<Grid>().ArrayGrid[xPosition , yPosition].GetComponent<Square>().isEmpty = false;
         //Play table sound
         soundEffect.PlayOneShot(moveTable);
     }
