@@ -18,8 +18,8 @@ public class MoveableObject : MonoBehaviour
 {
     #region Fields
     //GameObjects this is dependent on
-    private MoveableManager manager;
-    private Grid grid;
+    public MoveableManager manager;
+    public Grid grid;
     //Whether or not this object can be selected and moved
     public bool selectable;
     // The position of the top left corner of the square.
@@ -29,9 +29,11 @@ public class MoveableObject : MonoBehaviour
     // Whether or not the object is being lifted.
     private bool isLifted;
     //Whether or not the object is colliding with another object
+
     private bool isColliding;
     // For animations
-    public Animator animator;
+   //public Animator animator;
+
 
     //Audio variables
     private AudioSource soundEffect;
@@ -86,8 +88,8 @@ public class MoveableObject : MonoBehaviour
     void Start()
     {
         //Get managers/other dependencies
-        manager = FindObjectOfType<MoveableManager>(); //Search for manager in the scene
-        grid = manager.grid; //Grab grid from manager
+        //manager = FindObjectOfType<MoveableManager>(); //Search for manager in the scene
+        //grid = manager.grid; //Grab grid from manager
         isColliding = false;
         soundEffect = GetComponent<AudioSource>();
         
@@ -130,7 +132,6 @@ public class MoveableObject : MonoBehaviour
                         {
                             // Put it down.
                             isLifted = false;
-                            animator.SetBool("AnimTable", false);
                             //Set color of all associated objects to default color
                             this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.white);
                             for (int i = 0; i < associatedObjects.Count; i++)
@@ -150,7 +151,6 @@ public class MoveableObject : MonoBehaviour
                         {
                             // Lift it up.
                             isLifted = true;
-                            animator.SetBool("AnimTable", true);
                             //Change color of all associated objects to cyan
                             this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
                             for (int i = 0; i < associatedObjects.Count; i++)
@@ -236,11 +236,15 @@ public class MoveableObject : MonoBehaviour
             bool objectContainedInList = false;
             if(manager.selectedObject.associatedObjects!=null)
             {
-                if (manager.selectedObject.associatedObjects.Contains(this))
+                if (manager.selectedObject.associatedObjects.Count > 0)
                 {
-                    objectContainedInList = true;   
+                    if (manager.selectedObject.associatedObjects.Contains(this))
+                    {
+                        objectContainedInList = true;
+                    }
                 }
             }
+           
             
             //Set color to red so player knows they can't set the object down there.
             if (this == manager.selectedObject || objectContainedInList)
@@ -264,8 +268,22 @@ public class MoveableObject : MonoBehaviour
         if (other.gameObject.tag == "Object" || other.gameObject.tag == "Character" || other.gameObject.tag == "Wall")
         {
             isColliding = false;
+
+            //Checks if this object is an associated object
+            bool objectContainedInList = false;
+            if (manager.selectedObject.associatedObjects != null)
+            {
+                if (manager.selectedObject.associatedObjects.Count > 0)
+                {
+                    if (manager.selectedObject.associatedObjects.Contains(this))
+                    {
+                        objectContainedInList = true;
+                    }
+                }
+            }
+
             //Sets color back to default
-            if(this==manager.selectedObject || manager.selectedObject.associatedObjects.Contains(this))
+            if (this==manager.selectedObject || objectContainedInList)
             {
                 manager.selectedObject.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
                 for (int i = 0; i < manager.selectedObject.associatedObjects.Count; i++)
