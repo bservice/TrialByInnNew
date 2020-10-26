@@ -20,12 +20,15 @@ public class Grid : MonoBehaviour
     //Queque ref
     public CustomerQueque queRef;
     //Table Prefab
-    public GameObject table;
+    public GameObject tableHor;
+    public GameObject tableVer;
+    private GameObject table;
     // The matrix of squares.
     private GameObject[,] squares;
     //The Targets for the player
     private Vector2[] targets;
     private GameObject[] tables;
+    private int[] types;
 
     private int prev;
     #endregion
@@ -78,7 +81,7 @@ public class Grid : MonoBehaviour
         }
 
         targets = new Vector2[5];
-
+        types = new int[5];
         tables = new GameObject[5];
         populateTargets(5);
         Debug.Log(squares[1, 1]);
@@ -90,6 +93,8 @@ public class Grid : MonoBehaviour
         if(queRef.level != prev)
         {
             targets = new Vector2[queRef.size];
+            types = new int[queRef.size];
+            tables = new GameObject[queRef.size];
         }
         prev = queRef.level;
     }
@@ -123,6 +128,18 @@ public class Grid : MonoBehaviour
 
         for (int i = 0; i < sizeofQue; i++)
         {
+            int type = Random.Range(1, 10);
+            types[i] = type;
+
+            if(type <= 5)
+            {
+                table = tableHor;
+            }
+            else
+            {
+                table = tableVer;
+            }
+
             Vector3 temp;
             bool correct = false;
             temp.x = Random.Range(1, 14);
@@ -144,9 +161,18 @@ public class Grid : MonoBehaviour
                 {
                     //Gets the new x and y pos of the tables
                     if (
-                        i != 0 &&
-                        oldX <= temp.x && temp.x <= (oldX + 4) &&
-                        oldY <= temp.y && temp.y <= (oldY + 2)
+                        i != 0 && types[i] <= 5 &&
+                        oldX-1 <= temp.x && temp.x <= oldX + 1 &&
+                        oldY == temp.y 
+                        )
+                    {
+                        temp.x = Random.Range(1, 14);
+                        temp.y = Random.Range(1, 9);
+                    }
+                    else if (
+                        i != 0 && types[i] > 5 &&
+                        oldX == temp.x &&
+                        oldY - 1 <= temp.y && temp.y <= oldY + 1
                         )
                     {
                         temp.x = Random.Range(1, 14);
