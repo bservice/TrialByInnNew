@@ -18,8 +18,8 @@ public class MoveableObject : MonoBehaviour
 {
     #region Fields
     //GameObjects this is dependent on
-    public MoveableManager manager;
-    public Grid grid;
+    private MoveableManager manager;
+    private Grid grid;
     //Whether or not this object can be selected and moved
     public bool selectable;
     // The position of the top left corner of the square.
@@ -90,11 +90,13 @@ public class MoveableObject : MonoBehaviour
         grid = manager.grid; //Grab grid from manager
         isColliding = false;
         soundEffect = GetComponent<AudioSource>();
-
+        
+        /*
         //Mark current tiles taken up as empty
         grid.ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = true;
         grid.ArrayGrid[xPosition - 1, 9 - yPosition].GetComponent<Square>().isEmpty = true;
         grid.ArrayGrid[xPosition + 1, 9 - yPosition].GetComponent<Square>().isEmpty = true;
+        */
     }
 
     // Update is called once per frame
