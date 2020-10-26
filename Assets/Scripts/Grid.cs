@@ -116,7 +116,12 @@ public class Grid : MonoBehaviour
         //    squares[(int)temp.x, (int)temp.y].GetComponent<Square>().tar = true;
         //}
 
-        for (int i = 0; i < 5; i++)
+        if (sizeofQue == 0)
+        {
+            sizeofQue = 5;
+        }
+
+        for (int i = 0; i < sizeofQue; i++)
         {
             Vector3 temp;
             bool correct = false;
@@ -124,7 +129,7 @@ public class Grid : MonoBehaviour
             temp.y = Random.Range(1, 9);
             temp.z = 0;
 
-            for (int j = 0; j < 5; j++)
+            for (int j = 0; j < sizeofQue; j++)
             {
                 //If j == i break out of loop.  This happens when the j is trying to access a non instatated table
                 if (i == j)
