@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CustomerQueque : MonoBehaviour
 {
@@ -231,6 +232,10 @@ public class CustomerQueque : MonoBehaviour
 		scoreboard.Score += 100;
 		Debug.Log(index);
 		
+		if(level == 6)
+		{
+			SceneManager.LoadScene("EndScene");
+		}
 
 		//For each data spot in the queque fill with a random NPC
 		for (int i = 0; i < size; i++)

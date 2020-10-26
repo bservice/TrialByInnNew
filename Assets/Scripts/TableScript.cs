@@ -30,8 +30,7 @@ public class TableScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (this == manager.selectedObject)
+        if (this.gameObject.GetComponent<MoveableObject>().IsLifted)
         {
             animator.SetBool("AnimTable", true);
         }
