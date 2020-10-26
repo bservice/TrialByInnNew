@@ -29,6 +29,8 @@ public class MoveableObject : MonoBehaviour
     public bool isLifted;
     //Whether or not the object is colliding with another object
     public bool isColliding;
+    // For animations
+    public Animator animator;
 
     //Audio variables
     private AudioSource soundEffect;
@@ -87,6 +89,11 @@ public class MoveableObject : MonoBehaviour
         grid = manager.grid; //Grab grid from manager
         isColliding = false;
         soundEffect = GetComponent<AudioSource>();
+
+        //Mark current tiles taken up as empty
+        grid.ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = true;
+        grid.ArrayGrid[xPosition - 1, 9 - yPosition].GetComponent<Square>().isEmpty = true;
+        grid.ArrayGrid[xPosition + 1, 9 - yPosition].GetComponent<Square>().isEmpty = true;
     }
 
     // Update is called once per frame
@@ -120,6 +127,7 @@ public class MoveableObject : MonoBehaviour
                         {
                             // Put it down.
                             isLifted = false;
+                            animator.SetBool("AnimTable", false);
                             //Set color of all associated objects to default color
                             this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.white);
                             for (int i = 0; i < associatedObjects.Count; i++)
@@ -138,6 +146,7 @@ public class MoveableObject : MonoBehaviour
                         {
                             // Lift it up.
                             isLifted = true;
+                            animator.SetBool("AnimTable", true);
                             //Change color of all associated objects to cyan
                             this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
                             for (int i = 0; i < associatedObjects.Count; i++)
@@ -160,7 +169,9 @@ public class MoveableObject : MonoBehaviour
     //Called in: MoveableManager
     {
         //Mark current tiles taken up as empty
-        grid.ArrayGrid[xPosition, yPosition].GetComponent<Square>().isEmpty = true;
+        grid.ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = true;
+        grid.ArrayGrid[xPosition - 1, 9 - yPosition].GetComponent<Square>().isEmpty = true;
+        grid.ArrayGrid[xPosition + 1, 9 - yPosition].GetComponent<Square>().isEmpty = true;
         //Adds the amount we are moving by to the position so we know what part of the grid to move to.
         int xToMoveTo = xPosition + x;
         int yToMoveTo = yPosition + y;
@@ -170,7 +181,9 @@ public class MoveableObject : MonoBehaviour
         xPosition = xToMoveTo;
         yPosition = yToMoveTo;
         //Mark the squares that are taken up as NOT empty
-        grid.ArrayGrid[xPosition, yPosition].GetComponent<Square>().isEmpty = false;
+        grid.ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = false;
+        grid.ArrayGrid[xPosition - 1, 9 - yPosition].GetComponent<Square>().isEmpty = false;
+        grid.ArrayGrid[xPosition + 1, 9 - yPosition].GetComponent<Square>().isEmpty = false;
         //Play table sound
         soundEffect.PlayOneShot(moveTable);
     }
