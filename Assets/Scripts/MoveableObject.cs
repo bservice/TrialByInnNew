@@ -23,13 +23,13 @@ public class MoveableObject : MonoBehaviour
     //Whether or not this object can be selected and moved
     public bool selectable;
     // The position of the top left corner of the square.
-    public Vector2 position;
+    private Vector2 position;
     // The size of the object in pixels.
     private Vector2 size;
     // Whether or not the object is being lifted.
-    public bool isLifted;
+    private bool isLifted;
     //Whether or not the object is colliding with another object
-    public bool isColliding;
+    private bool isColliding;
     // For animations
     public Animator animator;
 
@@ -136,6 +136,7 @@ public class MoveableObject : MonoBehaviour
                             for (int i = 0; i < associatedObjects.Count; i++)
                             {
                                 associatedObjects[i].GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.white);
+                                this.GetComponent<Animator>().SetBool("", true);
                             }
                             //Unselect the Object. 
                             manager.selectedObject = null;
@@ -224,13 +225,14 @@ public class MoveableObject : MonoBehaviour
     }
 
     private void OnCollisionStay2D(Collision2D other)
-    //Effect: Sets colliding bool to true which is used in OnMouseDown()
+    //Effect: Sets colliding bool to true which is used in Update()
     //Called whenever there is a collision
     {
         if(other.gameObject.tag=="Object" || other.gameObject.tag == "Character" || other.gameObject.tag == "Wall") //So it doesn't happen with other misc colliders such as the grid tile's
         {
             isColliding = true;
             
+            //Checks if this object is an associated object
             bool objectContainedInList = false;
             if(manager.selectedObject.associatedObjects!=null)
             {
