@@ -83,7 +83,7 @@ public class Square : MonoBehaviour
     {
         this.GetComponent<SpriteRenderer>().enabled = true;
         this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.red);
-        Debug.Log(this.position);
+        //Debug.Log(this.position);
     }
 
     // What happens when the mouse exits a square.

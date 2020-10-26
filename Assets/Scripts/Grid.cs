@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.XR.WSA.Input;
 
 /// <summary>
 /// Holds all of the spaces on the grid.
@@ -17,10 +19,15 @@ public class Grid : MonoBehaviour
     public float size;
     //Queque ref
     public CustomerQueque queRef;
+    //Table Prefab
+    public GameObject table;
     // The matrix of squares.
     private GameObject[,] squares;
     //The Targets for the player
     private Vector2[] targets;
+    private GameObject[] tables;
+
+    private int prev;
     #endregion
 
     #region Properties
@@ -71,37 +78,93 @@ public class Grid : MonoBehaviour
         }
 
         targets = new Vector2[5];
-        populateTargets();
+
+        tables = new GameObject[5];
+        populateTargets(queRef.size);
         Debug.Log(squares[1, 1]);
+        //populateTargets();
+        //Debug.Log(squares[1, 1]);
+
+
+        tables = new GameObject[5];
+        populateTargets(5);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if(queRef.level != prev)
+        {
+            targets = new Vector2[queRef.size];
+        }
+        prev = queRef.level;
     }
 
-    void populateTargets()
+    void populateTargets(int sizeofQue)
     {
-        for(int i = 0; i < 5; i++)
+        //for(int i = 0; i < sizeofQue; i++)
+        //{
+        //    Vector2 temp;
+        //    temp.x = Random.Range(1, 14);
+        //    temp.y = Random.Range(1, 9);
+        //
+        //    if (i != 0 && temp.x == targets[i-1].x)
+        //    {
+        //        temp.x = Random.Range(1, 14);
+        //    }
+        //
+        //    if (i != 0 && temp.y == targets[i - 1].y)
+        //    {
+        //        temp.y = Random.Range(1, 9);
+        //    }
+        //
+        //    targets[i] = new Vector2(squares[(int)temp.x, (int)temp.y].GetComponent<Square>().position.x, squares[(int)temp.x, (int)temp.y].GetComponent<Square>().position.y);
+        //    squares[(int)temp.x, (int)temp.y].GetComponent<Square>().tar = true;
+        //}
+
+        for (int i = 0; i < 5; i++)
         {
-            Vector2 temp;
+            Vector3 temp;
+            bool correct = false;
             temp.x = Random.Range(1, 14);
             temp.y = Random.Range(1, 9);
+            temp.z = 0;
 
-            if (i != 0 && temp.x == targets[i-1].x)
+            for (int j = 0; j < 5; j++)
             {
-                temp.x = Random.Range(1, 14);
+                //If j == i break out of loop.  This happens when the j is trying to access a non instatated table
+                if (i == j)
+                {
+                    break;
+                }
+
+                int oldX = tables[j].GetComponent<MoveableObject>().xPosition;
+                int oldY = tables[j].GetComponent<MoveableObject>().yPosition;
+
+                while (!correct)
+                {
+                    //Gets the new x and y pos of the tables
+                    if (
+                        i != 0 &&
+                        oldX <= temp.x && temp.x <= (oldX + 4) &&
+                        oldY <= temp.y && temp.y <= (oldY + 2)
+                        )
+                    {
+                        temp.x = Random.Range(1, 14);
+                        temp.y = Random.Range(1, 9);
+                    }
+                    else
+                    {
+                        correct = true;
+                    }
+                }
+                correct = false;
             }
 
-            if (i != 0 && temp.y == targets[i - 1].y)
-            {
-                temp.y = Random.Range(1, 9);
-            }
-
-            targets[i] = new Vector2(squares[(int)temp.x, (int)temp.y].GetComponent<Square>().position.x, squares[(int)temp.x, (int)temp.y].GetComponent<Square>().position.y);
-            Debug.Log(targets[i]);
-            squares[(int)temp.x, (int)temp.y].GetComponent<Square>().tar = true;
+            tables[i] = Instantiate(table);
+            tables[i].GetComponent<MoveableObject>().xPosition = (int)temp.x;
+            tables[i].GetComponent<MoveableObject>().yPosition = (int)temp.y;
         }
     }
 }
