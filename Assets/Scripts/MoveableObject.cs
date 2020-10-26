@@ -29,6 +29,8 @@ public class MoveableObject : MonoBehaviour
     public bool isLifted;
     //Whether or not the object is colliding with another object
     public bool isColliding;
+    // For animations
+    public Animator animator;
 
     //Audio variables
     private AudioSource soundEffect;
@@ -125,6 +127,7 @@ public class MoveableObject : MonoBehaviour
                         {
                             // Put it down.
                             isLifted = false;
+                            animator.SetBool("AnimTable", false);
                             //Set color of all associated objects to default color
                             this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.white);
                             for (int i = 0; i < associatedObjects.Count; i++)
@@ -143,6 +146,7 @@ public class MoveableObject : MonoBehaviour
                         {
                             // Lift it up.
                             isLifted = true;
+                            animator.SetBool("AnimTable", true);
                             //Change color of all associated objects to cyan
                             this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
                             for (int i = 0; i < associatedObjects.Count; i++)

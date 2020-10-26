@@ -1186,9 +1186,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 1464143942}
   grid: {fileID: 205848647}
+  selectable: 0
   position: {x: 0, y: 0}
   isLifted: 0
   isColliding: 0
+  animator: {fileID: 8965726002138194460, guid: 2d798f2b538712648b361efef5d88773, type: 3}
+  moveTable: {fileID: 0}
   xPosition: 7
   yPosition: 5
   associatedObjects:
