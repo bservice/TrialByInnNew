@@ -58,7 +58,7 @@ public class GameUIDisplay : MonoBehaviour
     {
         scene = SceneManager.GetActiveScene().name;
 
-        if(scene != "CarsonTests" && scene != "LucasTests")
+        if(scene != "CarsonTests" && scene != "LucasTests" && scene != "Grid")
         {
             Destroy(this);
             Destroy(this.gameObject);
