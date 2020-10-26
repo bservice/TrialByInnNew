@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class TableScript : MonoBehaviour
 {
-    //Fields
+    #region Fields
     //List to hold the tables
+    List<MoveableObject> tables;
     //Number of tables
+    #endregion
 
+    #region Methods
     // Start is called before the first frame update
     void Start()
     {
@@ -21,4 +24,5 @@ public class TableScript : MonoBehaviour
     {
         
     }
+    #endregion
 }
