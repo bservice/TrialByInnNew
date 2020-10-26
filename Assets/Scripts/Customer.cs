@@ -7,8 +7,7 @@ using UnityEngine;
 public class Customer : MonoBehaviour
 {
     //~~~Public Fields~~~
-    public float speed = 0.003f;
-    public Grid grid;
+    public float speed = 0.003f;    
     public AudioClip step;
 
     //~~~Private Fields~~~
@@ -17,6 +16,7 @@ public class Customer : MonoBehaviour
     private PauseTest pauseMenu;
     private Onboarding onboard;
     private AudioSource soundEffect;
+    private Grid grid;
 
     // Carson Fields
     private float tileDistance = .16f;
@@ -26,7 +26,7 @@ public class Customer : MonoBehaviour
     private bool[] dir = { false, false, false, false }; // 0 = Up, 1 = Left, 2 = Down, 3 = Right
 
     public Animator animator;
-    public GameUIDisplay scoreboard;
+    private GameUIDisplay scoreboard;
 
 
     //~~~Properties~~~
@@ -49,6 +49,8 @@ public class Customer : MonoBehaviour
         pauseMenu = FindObjectOfType<PauseTest>();
         onboard = FindObjectOfType<Onboarding>();
         soundEffect = GetComponent<AudioSource>();
+        scoreboard = FindObjectOfType<GameUIDisplay>();
+        grid = FindObjectOfType<Grid>();
 
         // Carson Code
         // Call move every .3s
