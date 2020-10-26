@@ -19,6 +19,8 @@ public class MoveableObject : MonoBehaviour
     //GameObjects this is dependent on
     public MoveableManager manager;
     public Grid grid;
+    //Whether or not this object can be selected and moved
+    public bool selectable;
     // The position of the top left corner of the square.
     public Vector2 position;
     // The size of the object in pixels.
@@ -89,6 +91,7 @@ public class MoveableObject : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    //Checks for objects being selected
     {
 
         //Puts the object at the world position of their current tile (mostly used to get it in the right place at the start)
@@ -98,7 +101,7 @@ public class MoveableObject : MonoBehaviour
         cursorPosition = Camera.main.ScreenToWorldPoint(cursorPosition);
 
         //Selection for objects
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && selectable)
         {
             //AABB collision test for cursor
 
@@ -151,48 +154,6 @@ public class MoveableObject : MonoBehaviour
 
         }
     }
-    /*
-    private void OnMouseDown()
-    //Called when the left mouse button is clicked within this object's collider.
-    //Effect: Selects the object if it is unselected, unselects it if it is already selected.
-    {
-        // If the object is in the air...
-        if (isLifted)
-        {
-            //If intersecting another object, don't allow player to place object. Otherwise put object down 
-            if (!isColliding)
-            {
-                // Put it down.
-                isLifted = false;
-                //Set color of all associated objects to default color
-                this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.white);
-                for (int i = 0; i < associatedObjects.Count; i++)
-                {
-                        associatedObjects[i].GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.white);
-                }
-                //Unselect the Object. 
-                manager.selectedObject = null;
-            }
-        }
-        // If the object is on the ground...
-        else
-        {
-            //If you don't have another object selected
-            if(manager.selectedObject==null)
-            {
-                // Lift it up.
-                isLifted = true;
-                //Change color of all associated objects to cyan
-                this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
-                for (int i = 0; i < associatedObjects.Count; i++)
-                    {
-                        associatedObjects[i].GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
-                    }          
-                //Select the object.
-                manager.selectedObject = this;
-            }   
-        }
-    }*/
 
     public void MoveObject(int x, int y)
     //Effect: Moves the object to a new position based on xy grid position
@@ -223,7 +184,7 @@ public class MoveableObject : MonoBehaviour
         int xToMove = xPosition + x;
         int yToMove = yPosition + y;
         //Return true if the tile is empty, and if it's not a wall.
-        if (((xToMove < grid.gridSize.x) && (xToMove > -1) && (yToMove < grid.gridSize.y) && (yToMove > -1)) && grid.ArrayGrid[xToMove, yToMove].GetComponent<Square>().isEmpty)
+        if (((xToMove < grid.gridSize.x) && (xToMove > -1) && (yToMove < grid.gridSize.y) && (yToMove > -1)) /*&& grid.ArrayGrid[xToMove, yToMove].GetComponent<Square>().isEmpty*/)
         {
             return true;
         }
@@ -250,12 +211,13 @@ public class MoveableObject : MonoBehaviour
     //Effect: Sets colliding bool to true which is used in OnMouseDown()
     //Called whenever there is a collision
     {
-        if(other.gameObject.tag=="Object") //So it doesn't happen with other misc colliders such as the grid tile's
+        if(other.gameObject.tag=="Object" || other.gameObject.tag == "Character" || other.gameObject.tag == "Wall") //So it doesn't happen with other misc colliders such as the grid tile's
         {
             isColliding = true;
             //Set color to red so player knows they can't set the object down there.
             if (this == manager.selectedObject || manager.selectedObject.associatedObjects.Contains(this))
             {
+                Debug.Log("test");
                 manager.selectedObject.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.red);
                 if(manager.selectedObject.associatedObjects!=null)
                 {
@@ -271,7 +233,7 @@ public class MoveableObject : MonoBehaviour
     //Effect: Sets colliding bool to true which is used in OnMouseDown()
     //Called whenever there a collision ends
     {
-        if (other.gameObject.tag == "Object")
+        if (other.gameObject.tag == "Object" || other.gameObject.tag == "Character" || other.gameObject.tag == "Wall")
         {
             isColliding = false;
             //Sets color back to default
