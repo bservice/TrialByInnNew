@@ -72,7 +72,7 @@ public class Grid : MonoBehaviour
 
         targets = new Vector2[5];
         populateTargets();
-        Debug.Log(squares[1, 1]);
+        //Debug.Log(squares[1, 1]);
     }
 
     // Update is called once per frame
@@ -100,7 +100,7 @@ public class Grid : MonoBehaviour
             }
 
             targets[i] = new Vector2(squares[(int)temp.x, (int)temp.y].GetComponent<Square>().position.x, squares[(int)temp.x, (int)temp.y].GetComponent<Square>().position.y);
-            Debug.Log(targets[i]);
+            //Debug.Log(targets[i]);
             squares[(int)temp.x, (int)temp.y].GetComponent<Square>().tar = true;
         }
     }

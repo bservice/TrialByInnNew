@@ -102,7 +102,7 @@ public class LevelManager : MonoBehaviour
                     //Turning off click when the first patron is selected
                     click = false;
 
-                    Debug.Log(inProgress);
+                    //Debug.Log(inProgress);
                 }
             }
             /* Lucas Code
@@ -123,17 +123,17 @@ public class LevelManager : MonoBehaviour
             // Temp switches on Left Arrow Press
             if (Input.GetKeyDown(KeyCode.P))
             {
-                Debug.Log("C " + customerRef.transform.position);
+                //Debug.Log("C " + customerRef.transform.position);
                 for(int i = 0; i < gridref.Targets.Length; i++)
                 {
-                    Debug.Log("G " + gridref.Targets[i]);
+                    //Debug.Log("G " + gridref.Targets[i]);
                     if (
                         customerRef.transform.position.x <= gridref.Targets[i].x + 0.05 &&
                         customerRef.transform.position.x >= gridref.Targets[i].x - 0.05 &&
                         customerRef.transform.position.y <= gridref.Targets[i].y + 0.05 &&
                         customerRef.transform.position.y >= gridref.Targets[i].y - 0.05)
                     {
-                        Debug.Log("HIT");
+                        //Debug.Log("HIT");
                         quequeRef.ShiftQueque();
                         // + 50 per seat
                         scoreboard.Score += 50;
