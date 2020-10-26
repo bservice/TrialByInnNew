@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.XR.WSA;
 
@@ -227,8 +228,18 @@ public class MoveableObject : MonoBehaviour
         if(other.gameObject.tag=="Object" || other.gameObject.tag == "Character" || other.gameObject.tag == "Wall") //So it doesn't happen with other misc colliders such as the grid tile's
         {
             isColliding = true;
+            
+            bool objectContainedInList = false;
+            if(manager.selectedObject.associatedObjects!=null)
+            {
+                if (manager.selectedObject.associatedObjects.Contains(this))
+                {
+                    objectContainedInList = true;   
+                }
+            }
+            
             //Set color to red so player knows they can't set the object down there.
-            if (this == manager.selectedObject || manager.selectedObject.associatedObjects.Contains(this))
+            if (this == manager.selectedObject || objectContainedInList)
             {
                 Debug.Log("test");
                 manager.selectedObject.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.red);
