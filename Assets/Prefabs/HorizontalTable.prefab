@@ -104,7 +104,8 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   isLifted: 0
   isColliding: 0
-  moveTable: {fileID: 0}
+  animator: {fileID: 0}
+  moveTable: {fileID: 8300000, guid: e7c53bf33d710a8489bc829d618f6e76, type: 3}
   xPosition: 0
   yPosition: 0
   associatedObjects: []
