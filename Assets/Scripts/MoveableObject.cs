@@ -100,6 +100,7 @@ public class MoveableObject : MonoBehaviour
         grid.ArrayGrid[xPosition + 1, 9 - yPosition].GetComponent<Square>().isEmpty = true;
         */
         grid = FindObjectOfType<Grid>();
+        manager = FindObjectOfType<MoveableManager>();
     }
 
     // Update is called once per frame
