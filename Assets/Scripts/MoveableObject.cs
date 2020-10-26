@@ -87,6 +87,11 @@ public class MoveableObject : MonoBehaviour
         grid = manager.grid; //Grab grid from manager
         isColliding = false;
         soundEffect = GetComponent<AudioSource>();
+
+        //Mark current tiles taken up as empty
+        grid.ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = true;
+        grid.ArrayGrid[xPosition - 1, 9 - yPosition].GetComponent<Square>().isEmpty = true;
+        grid.ArrayGrid[xPosition + 1, 9 - yPosition].GetComponent<Square>().isEmpty = true;
     }
 
     // Update is called once per frame
@@ -160,7 +165,9 @@ public class MoveableObject : MonoBehaviour
     //Called in: MoveableManager
     {
         //Mark current tiles taken up as empty
-        grid.ArrayGrid[xPosition, yPosition].GetComponent<Square>().isEmpty = true;
+        grid.ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = true;
+        grid.ArrayGrid[xPosition - 1, 9 - yPosition].GetComponent<Square>().isEmpty = true;
+        grid.ArrayGrid[xPosition + 1, 9 - yPosition].GetComponent<Square>().isEmpty = true;
         //Adds the amount we are moving by to the position so we know what part of the grid to move to.
         int xToMoveTo = xPosition + x;
         int yToMoveTo = yPosition + y;
@@ -170,7 +177,9 @@ public class MoveableObject : MonoBehaviour
         xPosition = xToMoveTo;
         yPosition = yToMoveTo;
         //Mark the squares that are taken up as NOT empty
-        grid.ArrayGrid[xPosition, yPosition].GetComponent<Square>().isEmpty = false;
+        grid.ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = false;
+        grid.ArrayGrid[xPosition - 1, 9 - yPosition].GetComponent<Square>().isEmpty = false;
+        grid.ArrayGrid[xPosition + 1, 9 - yPosition].GetComponent<Square>().isEmpty = false;
         //Play table sound
         soundEffect.PlayOneShot(moveTable);
     }
