@@ -92,13 +92,14 @@ public class MoveableObject : MonoBehaviour
         //grid = manager.grid; //Grab grid from manager
         isColliding = false;
         soundEffect = GetComponent<AudioSource>();
-        
+
         /*
         //Mark current tiles taken up as empty
         grid.ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = true;
         grid.ArrayGrid[xPosition - 1, 9 - yPosition].GetComponent<Square>().isEmpty = true;
         grid.ArrayGrid[xPosition + 1, 9 - yPosition].GetComponent<Square>().isEmpty = true;
         */
+        grid = FindObjectOfType<Grid>();
     }
 
     // Update is called once per frame

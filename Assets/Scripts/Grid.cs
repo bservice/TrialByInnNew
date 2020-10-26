@@ -80,7 +80,7 @@ public class Grid : MonoBehaviour
         targets = new Vector2[5];
 
         tables = new GameObject[5];
-        populateTargets(queRef.size);
+        populateTargets(5);
         Debug.Log(squares[1, 1]);
     }
 
