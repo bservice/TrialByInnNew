@@ -78,11 +78,17 @@ public class Grid : MonoBehaviour
         }
 
         targets = new Vector2[5];
+
         tables = new GameObject[5];
         populateTargets(queRef.size);
         Debug.Log(squares[1, 1]);
         //populateTargets();
         //Debug.Log(squares[1, 1]);
+
+
+        tables = new GameObject[5];
+        populateTargets(5);
+
     }
 
     // Update is called once per frame
@@ -97,27 +103,25 @@ public class Grid : MonoBehaviour
 
     void populateTargets(int sizeofQue)
     {
-        Debug.Log(sizeofQue);
-        for(int i = 0; i < sizeofQue; i++)
-        {
-            Vector2 temp;
-            temp.x = Random.Range(1, 14);
-            temp.y = Random.Range(1, 9);
-
-            if (i != 0 && temp.x == targets[i-1].x)
-            {
-                temp.x = Random.Range(1, 14);
-            }
-
-            if (i != 0 && temp.y == targets[i - 1].y)
-            {
-                temp.y = Random.Range(1, 9);
-            }
-
-            targets[i] = new Vector2(squares[(int)temp.x, (int)temp.y].GetComponent<Square>().position.x, squares[(int)temp.x, (int)temp.y].GetComponent<Square>().position.y);
-            //Debug.Log(targets[i]);
-            squares[(int)temp.x, (int)temp.y].GetComponent<Square>().tar = true;
-        }
+        //for(int i = 0; i < sizeofQue; i++)
+        //{
+        //    Vector2 temp;
+        //    temp.x = Random.Range(1, 14);
+        //    temp.y = Random.Range(1, 9);
+        //
+        //    if (i != 0 && temp.x == targets[i-1].x)
+        //    {
+        //        temp.x = Random.Range(1, 14);
+        //    }
+        //
+        //    if (i != 0 && temp.y == targets[i - 1].y)
+        //    {
+        //        temp.y = Random.Range(1, 9);
+        //    }
+        //
+        //    targets[i] = new Vector2(squares[(int)temp.x, (int)temp.y].GetComponent<Square>().position.x, squares[(int)temp.x, (int)temp.y].GetComponent<Square>().position.y);
+        //    squares[(int)temp.x, (int)temp.y].GetComponent<Square>().tar = true;
+        //}
 
         for (int i = 0; i < 5; i++)
         {
