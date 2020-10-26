@@ -1510,7 +1510,7 @@ GameObject:
   - component: {fileID: 1900989063}
   - component: {fileID: 1900989062}
   m_Layer: 0
-  m_Name: MoveableObjectManager
+  m_Name: MoveableManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
