@@ -17,6 +17,7 @@ public class Customer : MonoBehaviour
     private Onboarding onboard;
     private AudioSource soundEffect;
     private Grid grid;
+    private LevelManager levelManager;
 
     // Carson Fields
     private float tileDistance = .16f;
@@ -54,7 +55,7 @@ public class Customer : MonoBehaviour
 
         // Carson Code
         // Call move every .3s
-        InvokeRepeating("move", 0.0f, 0.3f);
+        InvokeRepeating("move", 0.0f, 0.15f);
     }
 
     // Update is called once per frame
@@ -317,4 +318,28 @@ public class Customer : MonoBehaviour
             dir[3] = false;
     }
 
+    private void OnCollisionStay2D(Collision2D collision)
+    //Customer collision
+    {
+        //Allow them to sit if they are colliding with a seat
+        if (collision.gameObject.tag == "Seat")
+        {
+            //Set their color to blue
+            this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
+            //If they are pressing 'P', call the code in Level Manager that makes them sit down.
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                levelManager.CustomerCollision();
+            }
+        }
+        //Make it so that they can't collide with other customers
+            //Insert code here
+    }
+
+    //When customers leave a collision
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+       this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.white);
+
+    }
 }

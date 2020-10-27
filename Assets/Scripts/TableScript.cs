@@ -6,12 +6,16 @@ using UnityEngine;
 public class TableScript : MonoBehaviour
 {
     #region Fields
-    //List to hold the tables
-    List<MoveableObject> tables;
-    //Number of tables
-
+    public bool isHorizontal; //True if horizontal, false if vertical.
+    int tableNumber; //What number the table is for association purposes (Maybe unnecessary?)
+    public GameObject seatCollider;
+    public GameObject sCollider;
+    public GameObject table;
     public Animator animator;
-    private MoveableManager manager;
+    private GameObject manager;
+
+    public int xPosition;
+    public int yPosition;
 
     #endregion
 
@@ -19,17 +23,26 @@ public class TableScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        manager = FindObjectOfType<MoveableManager>(); //Search for manager in the scene
-       
+        table = gameObject;
+        //grid = GameObject.Find("Grid");
+        manager = GameObject.Find("MoveableManager");
 
-        //Give all tables the "table" tag
+        //Instantiate a box collider around the table to act as seats (This collider is a separate game object and separate from the table's own collider)
+        sCollider = Instantiate(seatCollider, this.gameObject.transform.position, Quaternion.identity); //Creates an empty moveable object that just has a collider
+        xPosition = table.GetComponent<MoveableObject>().xPosition;
+        yPosition = table.GetComponent<MoveableObject>().yPosition;
 
-        //Assign each a number so we can know it apart from other Tables
+
+        //this.gameObject.GetComponent<MoveableObject>().associatedObjects.Add(sCollider);
+        //sCollider.xPosition = this.gameObject.GetComponent<MoveableObject>().xPosition;
+        //sCollider.yPosition = this.gameObject.GetComponent<MoveableObject>().yPosition;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        //If selected, make the table have an animation
         if (this.gameObject.GetComponent<MoveableObject>().IsLifted)
         {
             animator.SetBool("AnimTable", true);
@@ -38,7 +51,12 @@ public class TableScript : MonoBehaviour
         {
             animator.SetBool("AnimTable", false);
         }
-        
+
+        //Make the table's seat collider travel with the table
+        xPosition = table.GetComponent<MoveableObject>().xPosition;
+        yPosition = table.GetComponent<MoveableObject>().yPosition;
+        sCollider.transform.position = table.GetComponent<MoveableObject>().grid.GetComponent<Grid>().ArrayGrid[xPosition, yPosition].GetComponent<Square>().Position;
+
     }
     #endregion
 }

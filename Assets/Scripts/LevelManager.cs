@@ -125,9 +125,10 @@ public class LevelManager : MonoBehaviour
             }
             */
 
+            //**BELOW TAKEN OUT AND PUT INTO METHOD UNDERNEATH UPDATE**
             // Carson Code
             // Temp switches on Left Arrow Press
-            if (Input.GetKeyDown(KeyCode.P))
+            /*if (Input.GetKeyDown(KeyCode.P))
             {
                 //Debug.Log("C " + customerRef.transform.position);
                 for(int i = 0; i < gridref.Targets.Length; i++)
@@ -155,10 +156,33 @@ public class LevelManager : MonoBehaviour
                         return;
                     }
                 }
-            }
+
+            }*/
 
 
         }
 
     }
+
+    public void CustomerCollision()
+    //Effect: Adjusts score and does other things I don't know ¯\_(ツ)_/¯
+    //Called by: OnCollisionStay2D in Customer.cs
+    {
+
+        //Debug.Log("HIT");
+        quequeRef.ShiftQueque();
+       // + 50 per seat
+       scoreboard.Score += 50;
+       scoreboard.PatronsSat++;
+       scoreboard.PatronsLeft--;
+       shift = false;
+       customerRef.ActivePlaying = false;
+       inProgress = false;
+       if (tableMove2)
+           tableMove = true;
+       table = false;
+       soundEffect.PlayOneShot(chair);
+       return;
+    }
+
 }

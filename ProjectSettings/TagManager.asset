@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Object
   - Character
+  - Wall
+  - Seat
   layers:
   - Default
   - TransparentFX

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3991721376109840505}
   - component: {fileID: 3991721376109840502}
   m_Layer: 0
-  m_Name: DefaultTable
+  m_Name: Horizontal Table 1
   m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -262,7 +262,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8bf67f9f97caa47a99cfcab8df4a08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHorizontal: 0
+  seatCollider: {fileID: 7914049955554312823, guid: fff7548b2ff86754099c1cc1962bd386, type: 3}
+  sCollider: {fileID: 0}
+  table: {fileID: 0}
   animator: {fileID: 3991721376109840502}
+  xPosition: 0
+  yPosition: 0
 --- !u!95 &3991721376109840502
 Animator:
   serializedVersion: 3

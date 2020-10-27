@@ -281,4 +281,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8bf67f9f97caa47a99cfcab8df4a08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHorizontal: 0
+  seatCollider: {fileID: 327314833878407339, guid: 52d6318d641a74443a5fc444909f246a, type: 3}
+  sCollider: {fileID: 0}
+  table: {fileID: 0}
   animator: {fileID: 76957576746571436}
+  xPosition: 0
+  yPosition: 0
