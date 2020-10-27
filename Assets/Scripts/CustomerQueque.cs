@@ -17,11 +17,16 @@ public class CustomerQueque : MonoBehaviour
 	public Customer wizard;
 	public PauseTest pauseMenu;
 	public GameUIDisplay scoreboard;
+	public GameObject level1Screen;
+	public GameObject level2Screen;
+	public GameObject level3Screen;
 
 	//~~~Private Fields~~~
 	private int index;
 	private int oldLevel;
 	private Vector3 pos;
+	private float timeLeft;
+	private bool moveScreen;
 
 	// Start is called before the first frame update
 	void Start()
@@ -32,6 +37,9 @@ public class CustomerQueque : MonoBehaviour
 		index = -1;
 		innerArray = new Customer[size];
 		scoreboard.PatronsLeft = size;
+		Debug.Log(index);
+		timeLeft = 3.0f;
+		moveScreen = false;
 		//Debug.Log(index);
 
 		//For each data spot in the queque fill with a random NPC
@@ -49,17 +57,20 @@ public class CustomerQueque : MonoBehaviour
 			if (IsEmpty() && scoreboard.PatronsSat == size)
 			{
 				ResetBoard();
-				//Re-make the queque based on the level
-				//if (oldLevel < level)
-				//{
-					//size = 3 + (2 * level);
-					////For each data spot in the queque fill with a random NPC
-					//for (int i = 0; i < size; i++)
-					//{
-					//	GetRandomNPC();
-					//}
-					//oldLevel = level;
-				//}
+			}
+
+			if (moveScreen)
+			{
+				timeLeft -= Time.deltaTime;
+
+				if (timeLeft <= 0.0f)
+				{
+					level1Screen.transform.position = new Vector3(10.0f, 10.0f, 0.0f);
+					level2Screen.transform.position = new Vector3(10.0f, 10.0f, 0.0f);
+					level3Screen.transform.position = new Vector3(10.0f, 10.0f, 0.0f);
+					timeLeft = 3.0f;
+					moveScreen = false;
+				}
 			}
 		}
 	}
@@ -230,7 +241,25 @@ public class CustomerQueque : MonoBehaviour
 		innerArray = new Customer[size];
 		scoreboard.PatronsLeft = size;
 		scoreboard.Score += 100;
-		//Debug.Log(index);
+		Debug.Log(index);
+		moveScreen = true;
+
+		if(level == 2)
+		{
+			level1Screen.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+		}
+
+		else if (level == 3)
+		{
+			level2Screen.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+		}
+
+		else if (level == 4)
+		{
+			level3Screen.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+		}
+
+		else if (level == 5)
 		
 		if(level == 6)
 		{
