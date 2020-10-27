@@ -726,7 +726,7 @@ PrefabInstance:
       objectReference: {fileID: 8649842841198047852, guid: 07f176e742a1cf247abe233f5e3a4b87, type: 3}
     - target: {fileID: 8508553702243303869, guid: 9183eb94a549af14db52d9602146e727, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.788
+      value: -1.18
       objectReference: {fileID: 0}
     - target: {fileID: 8508553702243303869, guid: 9183eb94a549af14db52d9602146e727, type: 3}
       propertyPath: m_LocalPosition.y
@@ -930,7 +930,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &2120905670
+--- !u!1 &2025022841
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -938,22 +938,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2120905672}
-  - component: {fileID: 2120905671}
+  - component: {fileID: 2025022843}
+  - component: {fileID: 2025022842}
   m_Layer: 0
-  m_Name: Title Screen Final
+  m_Name: Title Screen 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!212 &2120905671
+--- !u!212 &2025022842
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2120905670}
+  m_GameObject: {fileID: 2025022841}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -987,7 +987,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 511d3a2ab96751547a3232bd52940feb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6102a918b3c9b384594d63844b7fcfe9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -998,13 +998,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!4 &2120905672
+--- !u!4 &2025022843
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2120905670}
+  m_GameObject: {fileID: 2025022841}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.25, y: 0.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -1037,7 +1037,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7320850577687330010, guid: 0ddefba418a635049980a1d7f81504aa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.443
+      value: 1.865
       objectReference: {fileID: 0}
     - target: {fileID: 7320850577687330010, guid: 0ddefba418a635049980a1d7f81504aa, type: 3}
       propertyPath: m_LocalPosition.y
