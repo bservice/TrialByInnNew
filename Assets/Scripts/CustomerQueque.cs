@@ -37,13 +37,10 @@ public class CustomerQueque : MonoBehaviour
 		index = -1;
 		innerArray = new Customer[size];
 		scoreboard.PatronsLeft = size;
-<<<<<<< HEAD
 		Debug.Log(index);
 		timeLeft = 3.0f;
 		moveScreen = false;
-=======
 		//Debug.Log(index);
->>>>>>> 412aba185e19ed0cbec7fe143153e0f18359fdda
 
 		//For each data spot in the queque fill with a random NPC
 		for (int i = 0; i < size; i++)
@@ -244,7 +241,6 @@ public class CustomerQueque : MonoBehaviour
 		innerArray = new Customer[size];
 		scoreboard.PatronsLeft = size;
 		scoreboard.Score += 100;
-<<<<<<< HEAD
 		Debug.Log(index);
 		moveScreen = true;
 
@@ -264,11 +260,8 @@ public class CustomerQueque : MonoBehaviour
 		}
 
 		else if (level == 5)
-=======
-		//Debug.Log(index);
 		
 		if(level == 6)
->>>>>>> 412aba185e19ed0cbec7fe143153e0f18359fdda
 		{
 			SceneManager.LoadScene("EndScene");
 		}
