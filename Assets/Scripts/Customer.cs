@@ -18,6 +18,10 @@ public class Customer : MonoBehaviour
     private AudioSource soundEffect;
     private Grid grid;
     private LevelManager levelManager;
+    private GameObject moveableManager;
+    private int numberOfTables; //Stores how many tables are in the level
+    bool pPressed;
+
 
     // Carson Fields
     private float tileDistance = .16f;
@@ -52,10 +56,14 @@ public class Customer : MonoBehaviour
         soundEffect = GetComponent<AudioSource>();
         scoreboard = FindObjectOfType<GameUIDisplay>();
         grid = FindObjectOfType<Grid>();
-
+        moveableManager = GameObject.Find("MoveableManager");
         // Carson Code
         // Call move every .3s
         InvokeRepeating("move", 0.0f, 0.15f);
+
+        numberOfTables = moveableManager.GetComponent<MoveableManager>().tables.Count; //Set the number of tables in the level
+        pPressed = false;
+
     }
 
     // Update is called once per frame
@@ -108,6 +116,13 @@ public class Customer : MonoBehaviour
                 animator.SetBool("Sit", true);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            UnityEngine.Debug.Log("Hello");
+            pPressed = true;
+        }
+
     }
     // Carson Code
     // Move WASD in grid
@@ -326,13 +341,36 @@ public class Customer : MonoBehaviour
         {
             //Set their color to blue
             this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
-            //If they are pressing 'P', call the code in Level Manager that makes them sit down.
-            if (Input.GetKeyDown(KeyCode.P))
+
+            //If they are pressing 'P'
+            if (pPressed)
             {
+                UnityEngine.Debug.Log("Pressed during collision");
+                this.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.red);
+                //Grab the number of the collider
+                string snumToAssociate = collision.gameObject.name.Remove(0, 13);
+                int numToAssociate = int.Parse(snumToAssociate);
+                for(int i = 0; i < numberOfTables; i++)
+                //For each table in the list, check their number. Become an associated object when the numbers match.
+                {
+                    //Pull the number of the table 
+                    int tableNum = moveableManager.GetComponent<MoveableManager>().tables[i].GetComponent<TableScript>().tableNumber;
+                    //Check if the number is the same as the associated 
+                    if(numToAssociate==tableNum)
+                    {
+                        //If they are, add this customer to the table's moveable object list.
+                        moveableManager.GetComponent<MoveableManager>().tables[i].GetComponent<MoveableObject>().associatedObjects.Add(this.GetComponent<MoveableObject>());
+
+                        //Disable selection + movement for this customer
+
+                    }
+                }
+
+                //call the code in Level Manager that makes them sit down
                 levelManager.CustomerCollision();
             }
         }
-        //Make it so that they can't collide with other customers
+        //Make it so that they can't collide with other customers/tables
             //Insert code here
     }
 

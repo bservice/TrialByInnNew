@@ -21,7 +21,7 @@ public class MoveableManager : MonoBehaviour
     public Vector2[] objectDimensions;
     #endregion
     //Fields
-    public int tables; //Holds the number of tables 
+    public List<GameObject> tables; //Holds the number of tables 
     public Grid grid; //Insert the scene grid
     public MoveableObject selectedObject; //Will be the object currently selected, changed whenever a new object is selected
 

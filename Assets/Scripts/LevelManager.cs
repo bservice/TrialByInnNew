@@ -183,6 +183,7 @@ public class LevelManager : MonoBehaviour
        table = false;
        soundEffect.PlayOneShot(chair);
        return;
+
     }
 
 }

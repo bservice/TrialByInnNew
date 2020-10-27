@@ -228,16 +228,20 @@ public class MoveableObject : MonoBehaviour
 
             //Checks if this object is an associated object
             bool objectContainedInList = false;
-            if (manager.GetComponent<MoveableManager>().selectedObject.associatedObjects != null)
+            if(manager.GetComponent<MoveableManager>().selectedObject != null)
             {
-                if (manager.GetComponent<MoveableManager>().selectedObject.associatedObjects.Count > 0)
+                if (manager.GetComponent<MoveableManager>().selectedObject.associatedObjects != null)
                 {
-                    if (manager.GetComponent<MoveableManager>().selectedObject.associatedObjects.Contains(this))
+                    if (manager.GetComponent<MoveableManager>().selectedObject.associatedObjects.Count > 0)
                     {
-                        objectContainedInList = true;
+                        if (manager.GetComponent<MoveableManager>().selectedObject.associatedObjects.Contains(this))
+                        {
+                            objectContainedInList = true;
+                        }
                     }
                 }
             }
+             
 
             //Set color to red so player knows they can't set the object down there.
             if (this == manager.GetComponent<MoveableManager>().selectedObject || objectContainedInList)
@@ -263,19 +267,23 @@ public class MoveableObject : MonoBehaviour
 
                     //Checks if this object is an associated object
                     bool objectContainedInList = false;
-                    if (manager.GetComponent<MoveableManager>().selectedObject.associatedObjects != null)
+                    if(manager.GetComponent<MoveableManager>().selectedObject!=null)
                     {
-                        if (manager.GetComponent<MoveableManager>().selectedObject.associatedObjects.Count > 0)
+                        if (manager.GetComponent<MoveableManager>().selectedObject.associatedObjects != null)
                         {
-                            if (manager.GetComponent<MoveableManager>().selectedObject.associatedObjects.Contains(this))
+                            if (manager.GetComponent<MoveableManager>().selectedObject.associatedObjects.Count > 0)
                             {
-                                objectContainedInList = true;
+                                if (manager.GetComponent<MoveableManager>().selectedObject.associatedObjects.Contains(this))
+                                {
+                                    objectContainedInList = true;
+                                }
                             }
                         }
-                    }
 
-                    //Sets color back to default
-                    if (this == manager.GetComponent<MoveableManager>().selectedObject || objectContainedInList)
+                     }
+
+            //Sets color back to default
+            if (this == manager.GetComponent<MoveableManager>().selectedObject || objectContainedInList)
                     {
                         manager.GetComponent<MoveableManager>().selectedObject.GetComponent<SpriteRenderer>().material.SetColor("_Color", Color.cyan);
                         if (manager.GetComponent<MoveableManager>().selectedObject.associatedObjects != null)

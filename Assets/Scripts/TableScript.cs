@@ -7,12 +7,13 @@ public class TableScript : MonoBehaviour
 {
     #region Fields
     public bool isHorizontal; //True if horizontal, false if vertical.
-    int tableNumber; //What number the table is for association purposes (Maybe unnecessary?)
+    public int tableNumber; //What number the table is for association purposes (Maybe unnecessary?)
     public GameObject seatCollider;
     public GameObject sCollider;
     public GameObject table;
     public Animator animator;
     private GameObject manager;
+    
 
     public int xPosition;
     public int yPosition;
@@ -26,12 +27,15 @@ public class TableScript : MonoBehaviour
         table = gameObject;
         //grid = GameObject.Find("Grid");
         manager = GameObject.Find("MoveableManager");
+        //Set tableNumber to index in list
+        tableNumber = manager.GetComponent<MoveableManager>().tables.IndexOf(this.gameObject);
 
         //Instantiate a box collider around the table to act as seats (This collider is a separate game object and separate from the table's own collider)
         sCollider = Instantiate(seatCollider, this.gameObject.transform.position, Quaternion.identity); //Creates an empty moveable object that just has a collider
         xPosition = table.GetComponent<MoveableObject>().xPosition;
         yPosition = table.GetComponent<MoveableObject>().yPosition;
-
+        //Set name of collider to match the table
+        sCollider.name = "TableCollider" + tableNumber;
 
         //this.gameObject.GetComponent<MoveableObject>().associatedObjects.Add(sCollider);
         //sCollider.xPosition = this.gameObject.GetComponent<MoveableObject>().xPosition;

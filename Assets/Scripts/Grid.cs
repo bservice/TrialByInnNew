@@ -29,6 +29,8 @@ public class Grid : MonoBehaviour
     private Vector2[] targets;
     private GameObject[] tables;
     private int[] types;
+    public GameObject moveableManager;
+
 
     private int prev;
     #endregion
@@ -187,6 +189,8 @@ public class Grid : MonoBehaviour
             tables[i] = Instantiate(table);
             tables[i].GetComponent<MoveableObject>().xPosition = (int)temp.x;
             tables[i].GetComponent<MoveableObject>().yPosition = (int)temp.y;
+            //Add the table to manager list
+            moveableManager.GetComponent<MoveableManager>().tables.Add(tables[i]); //Make sure this gets cleared when the level resets
         }
     }
 }
