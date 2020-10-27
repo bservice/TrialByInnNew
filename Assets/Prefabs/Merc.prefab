@@ -99,10 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.003
-  grid: {fileID: 0}
   step: {fileID: 8300000, guid: f5bd15ad9f6d88944aa6755bb9cf7074, type: 3}
   animator: {fileID: 0}
-  scoreboard: {fileID: 0}
 --- !u!82 &8467117306967012637
 AudioSource:
   m_ObjectHideFlags: 0

@@ -32,7 +32,7 @@ public class CustomerQueque : MonoBehaviour
 		index = -1;
 		innerArray = new Customer[size];
 		scoreboard.PatronsLeft = size;
-		Debug.Log(index);
+		//Debug.Log(index);
 
 		//For each data spot in the queque fill with a random NPC
 		for (int i = 0; i < size; i++)
@@ -68,7 +68,7 @@ public class CustomerQueque : MonoBehaviour
 	void Push(Customer npc)
 	{
 		index++;
-		Debug.Log(index);
+		//Debug.Log(index);
 		//To see if the array is large enough to hold the data
 		if (size <= index)
 		{
@@ -126,7 +126,7 @@ public class CustomerQueque : MonoBehaviour
 			}
 
 			index--;
-			Debug.Log(index);
+			//Debug.Log(index);
 			return temp;
 		}
 	}
@@ -230,7 +230,7 @@ public class CustomerQueque : MonoBehaviour
 		innerArray = new Customer[size];
 		scoreboard.PatronsLeft = size;
 		scoreboard.Score += 100;
-		Debug.Log(index);
+		//Debug.Log(index);
 		
 		if(level == 6)
 		{

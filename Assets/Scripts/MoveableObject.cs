@@ -47,6 +47,9 @@ public class MoveableObject : MonoBehaviour
     public int height; //How many tiles tall the object is*/
     public List<MoveableObject> associatedObjects; //List full of the friends of the object that move with it
     Vector2 cursorPosition;
+
+    private bool isAnAssociatedCharacter; 
+
     //public Vector2 position;
     #endregion
     #region Properties
@@ -102,11 +105,23 @@ public class MoveableObject : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    //Checks for objects being selected
+    //Checks for objects being selected & Sets objects to their current x/y position on the grid
     {
+        
+        //Checks if this is a character that is an associated object
+        if(manager.GetComponent<MoveableManager>().selectedObject!=null)
+        {
+            if(manager.GetComponent<MoveableManager>().selectedObject.associatedObjects.Contains(this))
+            {
+                isAnAssociatedCharacter = true;
+            }
+        }
 
         //Puts the object at the world position of their current tile (mostly used to get it in the right place at the start)
-        transform.position = grid.GetComponent<Grid>().ArrayGrid[xPosition, yPosition].GetComponent<Square>().Position;
+        if(this.gameObject.tag!="Character" || isAnAssociatedCharacter)
+        {
+            transform.position = grid.GetComponent<Grid>().ArrayGrid[xPosition, yPosition].GetComponent<Square>().Position;
+        }
         //Grab vector2 for cursor to use in AABB math
         cursorPosition = Input.mousePosition;
         cursorPosition = Camera.main.ScreenToWorldPoint(cursorPosition);

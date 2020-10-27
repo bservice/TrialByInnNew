@@ -170,7 +170,7 @@ public class LevelManager : MonoBehaviour
     {
 
         //Debug.Log("HIT");
-        quequeRef.ShiftQueque();
+        quequeRef.ShiftQueque();    
        // + 50 per seat
        scoreboard.Score += 50;
        scoreboard.PatronsSat++;

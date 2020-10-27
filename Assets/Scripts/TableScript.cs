@@ -35,7 +35,7 @@ public class TableScript : MonoBehaviour
         xPosition = table.GetComponent<MoveableObject>().xPosition;
         yPosition = table.GetComponent<MoveableObject>().yPosition;
         //Set name of collider to match the table
-        sCollider.name = "TableCollider" + tableNumber;
+        sCollider.gameObject.name = "TableCollider" + tableNumber;
 
         //this.gameObject.GetComponent<MoveableObject>().associatedObjects.Add(sCollider);
         //sCollider.xPosition = this.gameObject.GetComponent<MoveableObject>().xPosition;

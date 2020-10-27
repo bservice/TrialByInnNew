@@ -1337,6 +1337,7 @@ MonoBehaviour:
   queRef: {fileID: 91449293}
   tableHor: {fileID: 3991721376109840510, guid: d64c5ccfea4624744898f0daa7c5ff55, type: 3}
   tableVer: {fileID: 76957577967626783, guid: 233dd7eb91c1f3f48803cfd15d181ac7, type: 3}
+  moveableManager: {fileID: 1900989061}
 --- !u!4 &1453088683
 Transform:
   m_ObjectHideFlags: 0
@@ -1533,7 +1534,7 @@ MonoBehaviour:
   - {x: 0, y: 0}
   objectDimensions:
   - {x: 0.16, y: 0.16}
-  tables: 0
+  tables: []
   grid: {fileID: 1453088682}
   selectedObject: {fileID: 0}
 --- !u!4 &1900989063
