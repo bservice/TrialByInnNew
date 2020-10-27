@@ -31,10 +31,11 @@ public class MoveableObject : MonoBehaviour
     // Whether or not the object is being lifted.
     private bool isLifted;
     //Whether or not the object is colliding with another object
-
     private bool isColliding;
+
+    private int type;
     // For animations
-   //public Animator animator;
+    //public Animator animator;
 
 
     //Audio variables
@@ -48,11 +49,16 @@ public class MoveableObject : MonoBehaviour
     public List<MoveableObject> associatedObjects; //List full of the friends of the object that move with it
     Vector2 cursorPosition;
 
-    private bool isAnAssociatedCharacter; 
+    private bool isAnAssociatedCharacter;
 
     //public Vector2 position;
     #endregion
     #region Properties
+    public int Type
+    {
+        get { return type; }
+        set { type = value; }
+    }
     public Vector2 Position
     {
         get { return position; }
@@ -100,7 +106,22 @@ public class MoveableObject : MonoBehaviour
         isColliding = false;
         soundEffect = GetComponent<AudioSource>();
         //Mark current tiles taken up as occupied
-        grid.GetComponent<Grid>().ArrayGrid[xPosition, yPosition].GetComponent<Square>().isEmpty = false;
+        //grid.GetComponent<Grid>().ArrayGrid[xPosition, yPosition].GetComponent<Square>().isEmpty = false;
+
+        if (type == 0)
+        {
+            grid.GetComponent<Grid>().ArrayGrid[xPosition - 1, 9 - yPosition].GetComponent<Square>().isEmpty = false;
+            grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = false;
+            grid.GetComponent<Grid>().ArrayGrid[xPosition + 1, 9 - yPosition].GetComponent<Square>().isEmpty = false;
+        }
+
+        if (type == 1)
+        {
+            grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition - 1].GetComponent<Square>().isEmpty = false;
+            grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = false;
+            grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition + 1].GetComponent<Square>().isEmpty = false;
+        }
+
     }
 
     // Update is called once per frame
@@ -186,7 +207,21 @@ public class MoveableObject : MonoBehaviour
     //Called in: MoveableManager
     {
         //Mark current tiles taken up as empty
-        grid.GetComponent<Grid>().ArrayGrid[xPosition, yPosition].GetComponent<Square>().isEmpty = true;
+        //grid.GetComponent<Grid>().ArrayGrid[xPosition, yPosition].GetComponent<Square>().isEmpty = true;
+
+        if (type == 0)
+        {
+            grid.GetComponent<Grid>().ArrayGrid[xPosition - 1, 9 - yPosition].GetComponent<Square>().isEmpty = true;
+            grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = true;
+            grid.GetComponent<Grid>().ArrayGrid[xPosition + 1, 9 - yPosition].GetComponent<Square>().isEmpty = true;
+        }
+
+        if (type == 1)
+        {
+            grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition - 1].GetComponent<Square>().isEmpty = true;
+            grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = true;
+            grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition + 1].GetComponent<Square>().isEmpty = true;
+        }
         //Adds the amount we are moving by to the position so we know what part of the grid to move to.
         int xToMoveTo = xPosition + x;
         int yToMoveTo = yPosition + y;
@@ -196,7 +231,21 @@ public class MoveableObject : MonoBehaviour
         xPosition = xToMoveTo;
         yPosition = yToMoveTo;
         //Mark the squares that are taken up as NOT empty
-        grid.GetComponent<Grid>().ArrayGrid[xPosition, yPosition].GetComponent<Square>().isEmpty = false;
+        //grid.GetComponent<Grid>().ArrayGrid[xPosition, yPosition].GetComponent<Square>().isEmpty = false;
+
+        if (type == 0)
+        {
+            grid.GetComponent<Grid>().ArrayGrid[xPosition - 1, 9 - yPosition].GetComponent<Square>().isEmpty = false;
+            grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = false;
+            grid.GetComponent<Grid>().ArrayGrid[xPosition + 1, 9 - yPosition].GetComponent<Square>().isEmpty = false;
+        }
+
+        if (type == 1)
+        {
+            grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition - 1].GetComponent<Square>().isEmpty = false;
+            grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = false;
+            grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition + 1].GetComponent<Square>().isEmpty = false;
+        }
         //Play table sound
         soundEffect.PlayOneShot(moveTable);
     }

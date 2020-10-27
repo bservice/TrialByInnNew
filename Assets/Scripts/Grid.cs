@@ -189,6 +189,18 @@ public class Grid : MonoBehaviour
             tables[i] = Instantiate(table);
             tables[i].GetComponent<MoveableObject>().xPosition = (int)temp.x;
             tables[i].GetComponent<MoveableObject>().yPosition = (int)temp.y;
+
+            if (type <= 5)
+            {
+                table = tableHor;
+                tables[i].GetComponent<MoveableObject>().Type = 0;
+            }
+            else
+            {
+                table = tableVer;
+                tables[i].GetComponent<MoveableObject>().Type = 1;
+            }
+
             //Add the table to manager list
             moveableManager.GetComponent<MoveableManager>().tables.Add(tables[i]); //Make sure this gets cleared when the level resets
         }
