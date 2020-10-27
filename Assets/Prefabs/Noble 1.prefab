@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 225360047593619185}
   - component: {fileID: 3730294279910293883}
   - component: {fileID: 8310290911884158726}
+  - component: {fileID: -5225355903414578715}
   m_Layer: 0
   m_Name: Noble 1
   m_TagString: Character
@@ -100,10 +101,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.003
-  grid: {fileID: 0}
   step: {fileID: 8300000, guid: f5bd15ad9f6d88944aa6755bb9cf7074, type: 3}
   animator: {fileID: 8310290911884158726}
-  scoreboard: {fileID: 0}
 --- !u!82 &8959724508956351317
 AudioSource:
   m_ObjectHideFlags: 0
@@ -266,3 +265,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-5225355903414578715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5762881399922972735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1523c955307355d469d05378feb078ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 0}
+  grid: {fileID: 0}
+  selectable: 0
+  moveTable: {fileID: 0}
+  xPosition: 0
+  yPosition: 0
+  associatedObjects: []

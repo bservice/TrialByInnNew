@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1244909271530736608}
   - component: {fileID: 1530775963445020475}
   - component: {fileID: 3505098405748634984}
+  - component: {fileID: 5773323692088621109}
   m_Layer: 0
   m_Name: Merc 1
   m_TagString: Character
@@ -100,10 +101,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.003
-  grid: {fileID: 0}
   step: {fileID: 8300000, guid: f5bd15ad9f6d88944aa6755bb9cf7074, type: 3}
   animator: {fileID: 3505098405748634984}
-  scoreboard: {fileID: 0}
 --- !u!82 &4982566930916913062
 AudioSource:
   m_ObjectHideFlags: 0
@@ -266,3 +265,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5773323692088621109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4666940653598806882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1523c955307355d469d05378feb078ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 0}
+  grid: {fileID: 0}
+  selectable: 0
+  moveTable: {fileID: 0}
+  xPosition: 0
+  yPosition: 0
+  associatedObjects: []
