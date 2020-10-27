@@ -160,20 +160,18 @@ public class Grid : MonoBehaviour
                 while (!correct)
                 {
                     //Gets the new x and y pos of the tables
-                    if (
-                        i != 0 && types[i] <= 5 &&
-                        oldX-1 <= temp.x && temp.x <= oldX + 1 &&
-                        oldY == temp.y 
-                        )
+                    if (i != 0 && types[j] <= 5 &&
+                        oldX-2 <= temp.x && temp.x <= oldX + 2 &&oldY == temp.y ||
+                        oldX - 2 <= temp.x -1 && temp.x -1 <= oldX + 2 && oldY == temp.y ||
+                        oldX - 2 <= temp.x + 1 && temp.x + 1 <= oldX + 2 && oldY == temp.y)
                     {
                         temp.x = Random.Range(1, 14);
                         temp.y = Random.Range(1, 9);
                     }
-                    else if (
-                        i != 0 && types[i] > 5 &&
-                        oldX == temp.x &&
-                        oldY - 1 <= temp.y && temp.y <= oldY + 1
-                        )
+                    else if (i != 0 && types[j] > 5 &&
+                        oldX == temp.x && oldY - 2 <= temp.y && temp.y <= oldY + 2 ||
+                        oldX == temp.x && oldY - 2 <= temp.y -1 && temp.y -1 <= oldY + 2 ||
+                        oldX == temp.x && oldY - 2 <= temp.y + 1 && temp.y + 1 <= oldY + 2)
                     {
                         temp.x = Random.Range(1, 14);
                         temp.y = Random.Range(1, 9);
