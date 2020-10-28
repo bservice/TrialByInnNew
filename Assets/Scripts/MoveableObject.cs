@@ -292,10 +292,21 @@ public class MoveableObject : MonoBehaviour
         int xToMove = xPosition + x;
         int yToMove = yPosition + y;
         //Return true if the tile is empty, and if it's not a wall.
-        if (((xToMove < grid.GetComponent<Grid>().gridSize.x) && (xToMove > -1) && (yToMove < grid.GetComponent<Grid>().gridSize.y) && (yToMove > -1)) /*&& grid.ArrayGrid[xToMove, yToMove].GetComponent<Square>().isEmpty*/)
+        if (type == 2 && ((xToMove < grid.GetComponent<Grid>().gridSize.x) && (xToMove > -1) && (yToMove < grid.GetComponent<Grid>().gridSize.y) && (yToMove > -1)) /*&& grid.ArrayGrid[xToMove, yToMove].GetComponent<Square>().isEmpty*/)
         {
             return true;
         }
+
+        if(type == 0 && xToMove - 1 > -1 && xToMove + 1 < grid.GetComponent<Grid>().gridSize.x && yToMove < grid.GetComponent<Grid>().gridSize.y && yToMove > -1)
+        {
+            return true;
+        }
+
+        if (type == 1 && xToMove > -1 && xToMove < grid.GetComponent<Grid>().gridSize.x && yToMove + 1 < grid.GetComponent<Grid>().gridSize.y && yToMove - 1 > -1)
+        {
+            return true;
+        }
+
         //Return false if the tile is occupied
         else
         {
