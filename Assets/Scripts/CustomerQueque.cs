@@ -28,13 +28,15 @@ public class CustomerQueque : MonoBehaviour
 	private float timeLeft;
 	private bool moveScreen;
 	private int prevSat;
+	private float xPos;
+	private float yPos;
 
 	// Start is called before the first frame update
 	void Start()
 	{
 		level = 1;
 		oldLevel = level;
-		size = 3 + (2 * level);
+		size = 4 + (2 * level);
 		index = -1;
 		innerArray = new Customer[size];
 		scoreboard.PatronsLeft = size;
@@ -42,6 +44,8 @@ public class CustomerQueque : MonoBehaviour
 		timeLeft = 3.0f;
 		moveScreen = false;
 		prevSat = 0;
+		xPos = -1000.0f;
+		yPos = -1000.0f;
 		//Debug.Log(index);
 
 		//For each data spot in the queque fill with a random NPC
@@ -70,6 +74,8 @@ public class CustomerQueque : MonoBehaviour
 					level1Screen.transform.position = new Vector3(10.0f, 10.0f, 0.0f);
 					level2Screen.transform.position = new Vector3(10.0f, 10.0f, 0.0f);
 					level3Screen.transform.position = new Vector3(10.0f, 10.0f, 0.0f);
+					xPos = -1000.0f;
+					yPos = -1000.0f;
 					timeLeft = 3.0f;
 					moveScreen = false;
 				}
@@ -239,7 +245,7 @@ public class CustomerQueque : MonoBehaviour
 	{
 		oldLevel = level;
 		
-		size = 3 + (2 * level);
+		size = 4 + (2 * level);
 		innerArray = new Customer[size];
 		scoreboard.PatronsLeft = size;
 		scoreboard.Score += 100;
@@ -250,27 +256,42 @@ public class CustomerQueque : MonoBehaviour
 		if(level == 2)
 		{
 			level1Screen.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+			xPos = level1Screen.transform.position.x;
+			yPos = level1Screen.transform.position.y;
 		}
 
 		else if (level == 3)
 		{
 			level2Screen.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+			xPos = level2Screen.transform.position.x;
+			yPos = level2Screen.transform.position.y;
 		}
 
 		else if (level == 4)
 		{
 			level3Screen.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+			xPos = level3Screen.transform.position.x;
+			yPos = level3Screen.transform.position.y;
 		}
 
 		else if (level == 5)
 		{
 			SceneManager.LoadScene("EndScene");
 		}
+
 		level++;
+
 		//For each data spot in the queque fill with a random NPC
 		for (int i = 0; i < size; i++)
 		{
 			GetRandomNPC();
 		}
+	}
+
+	//Display score on level complete screen
+	private void OnGUI()
+	{
+		//Score
+		GUI.Label(new Rect(xPos + 470.0f, yPos + 209.0f, 22, 19), scoreboard.Score.ToString());
 	}
 }
