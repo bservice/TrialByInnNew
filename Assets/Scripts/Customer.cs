@@ -109,9 +109,9 @@ public class Customer : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.J))
+        if (inSeat)
         {
-            if(inSeat)
+            if(Input.GetKeyDown(KeyCode.J))
             {
                 this.GetComponent<MoveableObject>().xPosition = curX;
                 this.GetComponent<MoveableObject>().yPosition = 9-curY;
@@ -137,7 +137,7 @@ public class Customer : MonoBehaviour
                 }
 
                 //call the code in Level Manager that makes them sit down
-                levelManager.CustomerCollision();
+                //levelManager.CustomerCollision();
             }
         }
 

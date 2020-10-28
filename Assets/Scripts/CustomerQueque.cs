@@ -27,6 +27,7 @@ public class CustomerQueque : MonoBehaviour
 	private Vector3 pos;
 	private float timeLeft;
 	private bool moveScreen;
+	private int prevSat;
 
 	// Start is called before the first frame update
 	void Start()
@@ -40,6 +41,7 @@ public class CustomerQueque : MonoBehaviour
 		Debug.Log(index);
 		timeLeft = 3.0f;
 		moveScreen = false;
+		prevSat = 0;
 		//Debug.Log(index);
 
 		//For each data spot in the queque fill with a random NPC
@@ -54,7 +56,7 @@ public class CustomerQueque : MonoBehaviour
 	{
 		if (!pauseMenu.Paused)
 		{
-			if (IsEmpty() && scoreboard.PatronsSat == size)
+			if (IsEmpty() && scoreboard.PatronsSat - prevSat == size)
 			{
 				ResetBoard();
 			}
@@ -243,6 +245,7 @@ public class CustomerQueque : MonoBehaviour
 		scoreboard.Score += 100;
 		Debug.Log(index);
 		moveScreen = true;
+		prevSat = scoreboard.PatronsSat;
 
 		if(level == 2)
 		{
@@ -260,8 +263,6 @@ public class CustomerQueque : MonoBehaviour
 		}
 
 		else if (level == 5)
-		
-		if(level == 6)
 		{
 			SceneManager.LoadScene("EndScene");
 		}
