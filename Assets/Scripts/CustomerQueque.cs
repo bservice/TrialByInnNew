@@ -238,7 +238,7 @@ public class CustomerQueque : MonoBehaviour
 	public void ResetBoard()
 	{
 		oldLevel = level;
-		level++;
+		
 		size = 3 + (2 * level);
 		innerArray = new Customer[size];
 		scoreboard.PatronsLeft = size;
@@ -266,7 +266,7 @@ public class CustomerQueque : MonoBehaviour
 		{
 			SceneManager.LoadScene("EndScene");
 		}
-
+		level++;
 		//For each data spot in the queque fill with a random NPC
 		for (int i = 0; i < size; i++)
 		{
