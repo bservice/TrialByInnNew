@@ -28,6 +28,7 @@ public class LevelManager : MonoBehaviour
     private bool tableMove;
     private bool tableMove2;
     private AudioSource soundEffect;
+    private Customer[] customers;
 
 
     // Start is called before the first frame update
@@ -43,6 +44,7 @@ public class LevelManager : MonoBehaviour
         tableMove = false;
         tableMove2 = true;
         soundEffect = GetComponent<AudioSource>();
+        //customers = FindObjectsOfType<Customer>();
     }
 
     // Update is called once per frame
@@ -159,6 +161,11 @@ public class LevelManager : MonoBehaviour
 
             }*/
 
+            //if(Input.GetKeyDown(KeyCode.J))
+            //{
+            //    CustomerCollision();
+            //}
+
 
         }
 
@@ -169,7 +176,7 @@ public class LevelManager : MonoBehaviour
     //Called by: OnCollisionStay2D in Customer.cs
     {
 
-        //Debug.Log("HIT");
+        Debug.Log("HIT");
         quequeRef.ShiftQueque();    
        // + 50 per seat
        scoreboard.Score += 50;

@@ -109,35 +109,38 @@ public class Customer : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.J))
+        if (inSeat)
         {
-            if(inSeat)
+            if (!isSeated)
             {
-                this.GetComponent<MoveableObject>().xPosition = curX;
-                this.GetComponent<MoveableObject>().yPosition = 9-curY;
-                isSeated = true;
-                //Grab the number of the collider
-                string snumToAssociate = seat.gameObject.name.Remove(0, 13);
-                UnityEngine.Debug.Log("Table number: " + snumToAssociate);
-                int numToAssociate = int.Parse(snumToAssociate);
-                for (int i = 0; i < numberOfTables; i++)
-                //For each table in the list, check their number. Become an associated object when the numbers match.
+                if (Input.GetKeyDown(KeyCode.J))
                 {
-                    //Pull the number of the table 
-                    int tableNum = moveableManager.GetComponent<MoveableManager>().tables[i].GetComponent<TableScript>().tableNumber;
-                    //Check if the number is the same as the associated 
-                    if (numToAssociate == tableNum)
+                    this.GetComponent<MoveableObject>().xPosition = curX;
+                    this.GetComponent<MoveableObject>().yPosition = 9 - curY;
+                    isSeated = true;
+                    //Grab the number of the collider
+                    string snumToAssociate = seat.gameObject.name.Remove(0, 13);
+                    UnityEngine.Debug.Log("Table number: " + snumToAssociate);
+                    int numToAssociate = int.Parse(snumToAssociate);
+                    for (int i = 0; i < numberOfTables; i++)
+                    //For each table in the list, check their number. Become an associated object when the numbers match.
                     {
-                        //If they are, add this customer to the table's moveable object list.
-                        moveableManager.GetComponent<MoveableManager>().tables[i].GetComponent<MoveableObject>().associatedObjects.Add(this.GetComponent<MoveableObject>());
+                        //Pull the number of the table 
+                        int tableNum = moveableManager.GetComponent<MoveableManager>().tables[i].GetComponent<TableScript>().tableNumber;
+                        //Check if the number is the same as the associated 
+                        if (numToAssociate == tableNum)
+                        {
+                            //If they are, add this customer to the table's moveable object list.
+                            moveableManager.GetComponent<MoveableManager>().tables[i].GetComponent<MoveableObject>().associatedObjects.Add(this.GetComponent<MoveableObject>());
 
-                        //Disable selection + movement for this customer
+                            //Disable selection + movement for this customer
 
+                        }
                     }
-                }
 
-                //call the code in Level Manager that makes them sit down
-                levelManager.CustomerCollision();
+                    //call the code in Level Manager that makes them sit down
+                    levelManager.CustomerCollision();
+                }
             }
         }
 
