@@ -118,6 +118,11 @@ public class MoveableManager : MonoBehaviour
                     selectedObject.associatedObjects[i].MoveObject(x, y);
                 }
             }
+
+            for(int i = 0; i < tables.Count; i++)
+            {
+                tables[i].GetComponent<MoveableObject>().Occupy();
+            }
         }
     }
 

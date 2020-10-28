@@ -33,7 +33,7 @@ public class MoveableObject : MonoBehaviour
     //Whether or not the object is colliding with another object
     private bool isColliding;
 
-    private int type;
+    private int type = 2;
     // For animations
     //public Animator animator;
 
@@ -120,6 +120,11 @@ public class MoveableObject : MonoBehaviour
             grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition - 1].GetComponent<Square>().isEmpty = false;
             grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = false;
             grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition + 1].GetComponent<Square>().isEmpty = false;
+        }
+
+        if(type == 2)
+        {
+            grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = false;
         }
 
     }
@@ -222,6 +227,12 @@ public class MoveableObject : MonoBehaviour
             grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = true;
             grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition + 1].GetComponent<Square>().isEmpty = true;
         }
+
+        if (type == 2)
+        {
+            grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = true;
+        }
+
         //Adds the amount we are moving by to the position so we know what part of the grid to move to.
         int xToMoveTo = xPosition + x;
         int yToMoveTo = yPosition + y;
@@ -246,8 +257,30 @@ public class MoveableObject : MonoBehaviour
             grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = false;
             grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition + 1].GetComponent<Square>().isEmpty = false;
         }
+
+        if (type == 2)
+        {
+            grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = false;
+        }
         //Play table sound
         soundEffect.PlayOneShot(moveTable);
+    }
+
+    public void Occupy()
+    {
+        if (type == 0)
+        {
+            grid.GetComponent<Grid>().ArrayGrid[xPosition - 1, 9 - yPosition].GetComponent<Square>().isEmpty = false;
+            grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = false;
+            grid.GetComponent<Grid>().ArrayGrid[xPosition + 1, 9 - yPosition].GetComponent<Square>().isEmpty = false;
+        }
+
+        if (type == 1)
+        {
+            grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition - 1].GetComponent<Square>().isEmpty = false;
+            grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = false;
+            grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition + 1].GetComponent<Square>().isEmpty = false;
+        }
     }
 
     public bool FreeMoveCheck(int x, int y)
