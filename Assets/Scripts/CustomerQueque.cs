@@ -36,7 +36,7 @@ public class CustomerQueque : MonoBehaviour
 	{
 		level = 1;
 		oldLevel = level;
-		size = 3 + (2 * level);
+		size = 4 + (2 * level);
 		index = -1;
 		innerArray = new Customer[size];
 		scoreboard.PatronsLeft = size;
@@ -245,7 +245,7 @@ public class CustomerQueque : MonoBehaviour
 	{
 		oldLevel = level;
 		
-		size = 3 + (2 * level);
+		size = 4 + (2 * level);
 		innerArray = new Customer[size];
 		scoreboard.PatronsLeft = size;
 		scoreboard.Score += 100;
