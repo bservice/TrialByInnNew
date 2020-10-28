@@ -108,6 +108,8 @@ public class MoveableObject : MonoBehaviour
         //Mark current tiles taken up as occupied
         //grid.GetComponent<Grid>().ArrayGrid[xPosition, yPosition].GetComponent<Square>().isEmpty = false;
 
+        //Mark each spot the tables take up as filled--this is for collision to work properly.
+        //0 = If a Horizontal Table
         if (type == 0)
         {
             grid.GetComponent<Grid>().ArrayGrid[xPosition - 1, 9 - yPosition].GetComponent<Square>().isEmpty = false;
@@ -115,6 +117,7 @@ public class MoveableObject : MonoBehaviour
             grid.GetComponent<Grid>().ArrayGrid[xPosition + 1, 9 - yPosition].GetComponent<Square>().isEmpty = false;
         }
 
+        //1 = If a Vertical table
         if (type == 1)
         {
             grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition - 1].GetComponent<Square>().isEmpty = false;
@@ -122,6 +125,7 @@ public class MoveableObject : MonoBehaviour
             grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition + 1].GetComponent<Square>().isEmpty = false;
         }
 
+        //2 = If a character
         if(type == 2)
         {
             grid.GetComponent<Grid>().ArrayGrid[xPosition, 9 - yPosition].GetComponent<Square>().isEmpty = false;
