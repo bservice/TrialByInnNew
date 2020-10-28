@@ -1738,6 +1738,7 @@ MonoBehaviour:
   tables: []
   grid: {fileID: 1453088682}
   selectedObject: {fileID: 0}
+  pauseMenu: {fileID: 57444433}
 --- !u!4 &1900989063
 Transform:
   m_ObjectHideFlags: 0
