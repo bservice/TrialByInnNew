@@ -113,7 +113,7 @@ public class Customer : MonoBehaviour
         {
             if (!isSeated)
             {
-                if (Input.GetKeyDown(KeyCode.P))
+                if (Input.GetKeyDown(KeyCode.E))
                 {
                     //Set the xPos and yPos in moveable object so their positions are lined up
                     this.GetComponent<MoveableObject>().xPosition = curX;

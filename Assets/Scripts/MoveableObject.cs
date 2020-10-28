@@ -33,6 +33,9 @@ public class MoveableObject : MonoBehaviour
     //Whether or not the object is colliding with another object
     private bool isColliding;
 
+    //Scoreboard object
+    public GameObject scoreboard;
+
     private int type = 2;
     // For animations
     //public Animator animator;
@@ -101,6 +104,7 @@ public class MoveableObject : MonoBehaviour
         //Get managers/other dependencies
         grid = GameObject.Find("Grid");
         manager = GameObject.Find("MoveableManager");
+        scoreboard = GameObject.Find("GameUI");
         //manager = FindObjectOfType<MoveableManager>(); //Search for manager in the scene
         //grid = manager.grid; //Grab grid from manager
         isColliding = false;
@@ -268,6 +272,8 @@ public class MoveableObject : MonoBehaviour
         }
         //Play table sound
         soundEffect.PlayOneShot(moveTable);
+        //Decrease score
+        scoreboard.GetComponent<GameUIDisplay>().Score -= 10;
     }
 
     public void Occupy()

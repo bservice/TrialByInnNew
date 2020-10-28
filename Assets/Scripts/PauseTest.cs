@@ -51,7 +51,7 @@ public class PauseTest : MonoBehaviour
         else
         {
             //playButton.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
-            if (Input.GetKeyDown(KeyCode.M))
+            if (Input.GetKeyDown(KeyCode.Tab))
             {
                 //playButton.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
                 paused = true;
