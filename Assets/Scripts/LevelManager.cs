@@ -161,10 +161,10 @@ public class LevelManager : MonoBehaviour
 
             }*/
 
-            if(Input.GetKeyDown(KeyCode.J))
-            {
-                CustomerCollision();
-            }
+            //if(Input.GetKeyDown(KeyCode.J))
+            //{
+            //    CustomerCollision();
+            //}
 
 
         }
