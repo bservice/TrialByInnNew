@@ -29,7 +29,7 @@ public class EndDisplay : MonoBehaviour
         xPos = Camera.main.WorldToScreenPoint(displayBoard.gameObject.transform.position).x;
         yPos = Screen.height - Camera.main.WorldToScreenPoint(displayBoard.gameObject.transform.position).y;
         style = new GUIStyle();
-        style.fontSize = 28;
+        style.fontSize = 35;
         style.normal.textColor = Color.white;
     }
 
@@ -42,6 +42,6 @@ public class EndDisplay : MonoBehaviour
 
     private void OnGUI()
     {
-        GUI.Label(new Rect(xPos + 60.0f, yPos - 15.0f, 22, 19), scoreboard.Score.ToString(), style);
+        GUI.Label(new Rect(xPos + 68.0f, yPos - 20.0f, 22, 19), scoreboard.Score.ToString(), style);
     }
 }

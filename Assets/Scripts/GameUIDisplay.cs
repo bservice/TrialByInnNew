@@ -15,6 +15,8 @@ public class GameUIDisplay : MonoBehaviour
     private float xPos;
     private float yPos;
 
+    private GUIStyle style;
+
     public int PatronsLeft
     {
         get { return patronsLeft; }
@@ -50,6 +52,9 @@ public class GameUIDisplay : MonoBehaviour
         score = 1200;
         xPos = Camera.main.WorldToScreenPoint(gameObject.transform.position).x;
         yPos = Screen.height - Camera.main.WorldToScreenPoint(gameObject.transform.position).y;
+        style = new GUIStyle();
+        style.fontSize = 25;
+        style.normal.textColor = Color.white;
     }
 
     // Update is called once per frame
@@ -70,12 +75,12 @@ public class GameUIDisplay : MonoBehaviour
     private void OnGUI()
     {
         //Patrons left
-        GUI.Label(new Rect(xPos + 55.0f, yPos - 39.0f, 22, 19), patronsLeft.ToString());
+        GUI.Label(new Rect(xPos + 100.0f, yPos - 63.0f, 22, 19), patronsLeft.ToString(), style);
 
         //Patrons sat
-        GUI.Label(new Rect(xPos + 55.0f, yPos - 9.0f, 22, 19), patronsSat.ToString());
+        GUI.Label(new Rect(xPos + 100.0f, yPos - 9.0f, 22, 19), patronsSat.ToString(), style);
 
         //Score
-        GUI.Label(new Rect(xPos + 55.0f, yPos + 19.0f, 22, 19), score.ToString());
+        GUI.Label(new Rect(xPos + 90.0f, yPos + 42.0f, 22, 19), score.ToString(), style);
     }
 }

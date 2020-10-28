@@ -31,6 +31,7 @@ public class CustomerQueque : MonoBehaviour
 	private int prevSat;
 	private float xPos;
 	private float yPos;
+	private GUIStyle style;
 
 	// Start is called before the first frame update
 	void Start()
@@ -47,6 +48,9 @@ public class CustomerQueque : MonoBehaviour
 		prevSat = 0;
 		xPos = -1000.0f;
 		yPos = -1000.0f;
+		style = new GUIStyle();
+		style.fontSize = 35;
+		style.normal.textColor = Color.white;
 		//Debug.Log(index);
 
 		//For each data spot in the queque fill with a random NPC
@@ -301,6 +305,6 @@ public class CustomerQueque : MonoBehaviour
 	private void OnGUI()
 	{
 		//Score
-		GUI.Label(new Rect(xPos + 470.0f, yPos + 209.0f, 22, 19), scoreboard.Score.ToString());
+		GUI.Label(new Rect(xPos + 910.0f, yPos + 522.0f, 22, 19), scoreboard.Score.ToString(), style);
 	}
 }
