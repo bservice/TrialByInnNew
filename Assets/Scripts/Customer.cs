@@ -64,7 +64,7 @@ public class Customer : MonoBehaviour
         moveableManager = GameObject.Find("MoveableManager");
         // Carson Code
         // Call move every .3s
-        InvokeRepeating("move", 0.0f, 0.15f);
+        InvokeRepeating("move", 0.0f, 0.15f); //This is in start but will run every .3s
 
 
         //Seating initialization
@@ -113,14 +113,15 @@ public class Customer : MonoBehaviour
         {
             if (!isSeated)
             {
-                if (Input.GetKeyDown(KeyCode.J))
+                if (Input.GetKeyDown(KeyCode.P))
                 {
+                    //Set the xPos and yPos in moveable object so their positions are lined up
                     this.GetComponent<MoveableObject>().xPosition = curX;
                     this.GetComponent<MoveableObject>().yPosition = 9 - curY;
+               
                     isSeated = true;
                     //Grab the number of the collider
-                    string snumToAssociate = seat.gameObject.name.Remove(0, 13);
-                    UnityEngine.Debug.Log("Table number: " + snumToAssociate);
+                    string snumToAssociate = seat.gameObject.name.Remove(0, 13); //Trim the rest of the name so you just have the number (number assigned in TableScript)
                     int numToAssociate = int.Parse(snumToAssociate);
                     for (int i = 0; i < numberOfTables; i++)
                     //For each table in the list, check their number. Become an associated object when the numbers match.
@@ -134,7 +135,7 @@ public class Customer : MonoBehaviour
                             moveableManager.GetComponent<MoveableManager>().tables[i].GetComponent<MoveableObject>().associatedObjects.Add(this.GetComponent<MoveableObject>());
 
                             //Disable selection + movement for this customer
-
+                            //This seems to happen already!
                         }
                     }
 
