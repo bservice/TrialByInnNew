@@ -24,6 +24,7 @@ public class MoveableManager : MonoBehaviour
     public List<GameObject> tables; //Holds the number of tables 
     public Grid grid; //Insert the scene grid
     public MoveableObject selectedObject; //Will be the object currently selected, changed whenever a new object is selected
+    public PauseTest pauseMenu;
 
 
 
@@ -49,29 +50,32 @@ public class MoveableManager : MonoBehaviour
     //Update is called once per frame
     //Effect: Collects player input and transmits that information to MoveAttempt()
     {
-        if (selectedObject==null)
+        if (!pauseMenu.Paused)
         {
-           //Do nothing
-        }
-        //If an object is selected
-        else
-        { 
-            //Based on input, move in a particular direction
-            if(Input.GetKeyDown(KeyCode.W))
+            if (selectedObject == null)
             {
-                MoveAttempt('w');
+                //Do nothing
             }
-            else if (Input.GetKeyDown(KeyCode.S))
+            //If an object is selected
+            else
             {
-                MoveAttempt('s');
-            }
-            else if (Input.GetKeyDown(KeyCode.A))
-            {
-                MoveAttempt('a');
-            }
-            else if (Input.GetKeyDown(KeyCode.D))
-            {
-                MoveAttempt('d');
+                //Based on input, move in a particular direction
+                if (Input.GetKeyDown(KeyCode.W))
+                {
+                    MoveAttempt('w');
+                }
+                else if (Input.GetKeyDown(KeyCode.S))
+                {
+                    MoveAttempt('s');
+                }
+                else if (Input.GetKeyDown(KeyCode.A))
+                {
+                    MoveAttempt('a');
+                }
+                else if (Input.GetKeyDown(KeyCode.D))
+                {
+                    MoveAttempt('d');
+                }
             }
         }
     }

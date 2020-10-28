@@ -20,6 +20,7 @@ public class CustomerQueque : MonoBehaviour
 	public GameObject level1Screen;
 	public GameObject level2Screen;
 	public GameObject level3Screen;
+	public GameObject tutorialScreen;
 
 	//~~~Private Fields~~~
 	private int index;
@@ -74,6 +75,7 @@ public class CustomerQueque : MonoBehaviour
 					level1Screen.transform.position = new Vector3(10.0f, 10.0f, 0.0f);
 					level2Screen.transform.position = new Vector3(10.0f, 10.0f, 0.0f);
 					level3Screen.transform.position = new Vector3(10.0f, 10.0f, 0.0f);
+					tutorialScreen.transform.position = new Vector3(10.0f, 10.0f, 0.0f);
 					xPos = -1000.0f;
 					yPos = -1000.0f;
 					timeLeft = 3.0f;
@@ -253,7 +255,14 @@ public class CustomerQueque : MonoBehaviour
 		moveScreen = true;
 		prevSat = scoreboard.PatronsSat;
 
-		if(level == 2)
+		if (level == 1)
+		{
+			tutorialScreen.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+			xPos = -1000.0f;
+			yPos = -1000.0f;
+		}
+
+		if (level == 2)
 		{
 			level1Screen.transform.position = new Vector3(0.0f, 0.0f, 0.0f);
 			xPos = level1Screen.transform.position.x;

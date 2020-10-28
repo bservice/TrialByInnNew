@@ -42,6 +42,6 @@ public class EndDisplay : MonoBehaviour
 
     private void OnGUI()
     {
-        GUI.Label(new Rect(xPos + 115.0f, yPos + 95.0f, 22, 19), score.ToString(), style);
+        GUI.Label(new Rect(xPos + 60.0f, yPos - 15.0f, 22, 19), scoreboard.Score.ToString(), style);
     }
 }
